@@ -1,0 +1,162 @@
+import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
+import { createDefaultProject, createLayoutPreset, createPage, normalizeProject } from './defaults'
+import type { PortfolioPage, PortfolioProject } from './types'
+
+type BuilderState = {
+  project: PortfolioProject
+  activePageId: string
+  previewZoom: 'fit' | 0.5 | 0.75 | 1
+  showGuides: boolean
+  overflowWarning: boolean
+  setProject: (project: PortfolioProject) => void
+  setSetting: <K extends keyof PortfolioProject['settings']>(key: K, value: PortfolioProject['settings'][K]) => void
+  setActivePage: (id: string) => void
+  updateActivePage: (patch: Partial<PortfolioPage>) => void
+  updatePage: (id: string, patch: Partial<PortfolioPage>) => void
+  addPage: () => void
+  duplicatePage: (id: string) => void
+  deletePage: (id: string) => void
+  movePage: (id: string, direction: -1 | 1) => void
+  saveActiveLayoutAsDefault: () => void
+  setPreviewZoom: (zoom: BuilderState['previewZoom']) => void
+  setShowGuides: (show: boolean) => void
+  setOverflowWarning: (warning: boolean) => void
+}
+
+const defaultProject = createDefaultProject()
+
+function clonePage(page: PortfolioPage, pageNumber?: string): PortfolioPage {
+  return {
+    ...page,
+    id: crypto.randomUUID(),
+    name: `${page.name} Copy`,
+    pageNumber: pageNumber ?? page.pageNumber,
+    keyFocus: [...page.keyFocus],
+    imageSettings: { ...page.imageSettings },
+    heroLayout: { ...page.heroLayout },
+    textLayout: { ...page.textLayout },
+    fontSettings: { ...page.fontSettings },
+    theme: { ...page.theme },
+  }
+}
+
+export const useBuilderStore = create<BuilderState>()(
+  persist(
+    (set, get) => ({
+      project: defaultProject,
+      activePageId: defaultProject.pages[0].id,
+      previewZoom: 'fit',
+      showGuides: false,
+      overflowWarning: false,
+      setProject: (project) =>
+        set({
+          project: normalizeProject(project),
+          activePageId: project.pages[0]?.id ?? createDefaultProject().pages[0].id,
+          overflowWarning: false,
+        }),
+      setSetting: (key, value) =>
+        set((state) => ({
+          project: {
+            ...state.project,
+            settings: { ...state.project.settings, [key]: value },
+          },
+        })),
+      setActivePage: (id) => set({ activePageId: id }),
+      updateActivePage: (patch) => {
+        const id = get().activePageId
+        get().updatePage(id, patch)
+      },
+      updatePage: (id, patch) =>
+        set((state) => ({
+          project: {
+            ...state.project,
+            pages: state.project.pages.map((page) => (page.id === id ? { ...page, ...patch } : page)),
+          },
+        })),
+      addPage: () =>
+        set((state) => {
+          const nextNumber = String(state.project.pages.length + 1).padStart(2, '0')
+          const page = createPage({
+            ...(state.project.defaultPageLayout ?? {}),
+            pageNumber: nextNumber,
+            name: `Page ${nextNumber}`,
+          })
+          return {
+            project: { ...state.project, pages: [...state.project.pages, page] },
+            activePageId: page.id,
+          }
+        }),
+      duplicatePage: (id) =>
+        set((state) => {
+          const index = state.project.pages.findIndex((page) => page.id === id)
+          if (index < 0) return state
+          const duplicate = clonePage(state.project.pages[index], String(state.project.pages.length + 1).padStart(2, '0'))
+          const pages = [...state.project.pages]
+          pages.splice(index + 1, 0, duplicate)
+          return { project: { ...state.project, pages }, activePageId: duplicate.id }
+        }),
+      deletePage: (id) =>
+        set((state) => {
+          if (state.project.pages.length === 1) return state
+          const pages = state.project.pages.filter((page) => page.id !== id)
+          const activePageId = state.activePageId === id ? pages[0].id : state.activePageId
+          return { project: { ...state.project, pages }, activePageId }
+        }),
+      movePage: (id, direction) =>
+        set((state) => {
+          const index = state.project.pages.findIndex((page) => page.id === id)
+          const nextIndex = index + direction
+          if (index < 0 || nextIndex < 0 || nextIndex >= state.project.pages.length) return state
+          const pages = [...state.project.pages]
+          const [page] = pages.splice(index, 1)
+          pages.splice(nextIndex, 0, page)
+          return { project: { ...state.project, pages } }
+        }),
+      saveActiveLayoutAsDefault: () =>
+        set((state) => {
+          const activePage = state.project.pages.find((page) => page.id === state.activePageId)
+          if (!activePage) return state
+          return {
+            project: {
+              ...state.project,
+              defaultPageLayout: createLayoutPreset(activePage),
+            },
+          }
+        }),
+      setPreviewZoom: (previewZoom) => set({ previewZoom }),
+      setShowGuides: (showGuides) => set({ showGuides }),
+      setOverflowWarning: (overflowWarning) => set({ overflowWarning }),
+    }),
+    {
+      name: 'black-lab-portfolio-builder',
+      storage: createJSONStorage(() => ({
+        getItem: (name) => localStorage.getItem(name),
+        setItem: (name, value) => {
+          try {
+            localStorage.setItem(name, value)
+          } catch (error) {
+            console.warn('Autosave skipped because browser storage is full.', error)
+          }
+        },
+        removeItem: (name) => localStorage.removeItem(name),
+      })),
+      partialize: (state) => ({
+        project: state.project,
+        activePageId: state.activePageId,
+        previewZoom: state.previewZoom,
+        showGuides: state.showGuides,
+      }),
+      merge: (persisted, current) => {
+        const value = persisted as Partial<BuilderState>
+        const project = value.project ? normalizeProject(value.project) : current.project
+        return {
+          ...current,
+          ...value,
+          project,
+          activePageId: project.pages.some((page) => page.id === value.activePageId) ? value.activePageId! : project.pages[0].id,
+        }
+      },
+    },
+  ),
+)
