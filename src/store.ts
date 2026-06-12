@@ -208,7 +208,7 @@ export const useBuilderStore = create<BuilderState>()(
     }),
     {
       name: 'black-lab-portfolio-builder',
-      version: 4,
+      version: 5,
       storage: createJSONStorage(() => ({
         getItem: (name) => localStorage.getItem(name),
         setItem: (name, value) => {
@@ -228,16 +228,31 @@ export const useBuilderStore = create<BuilderState>()(
         hasUnsavedChanges: state.hasUnsavedChanges,
         lastSavedAt: state.lastSavedAt,
       }),
-      migrate: () => {
-        const project = createDefaultProject()
+      migrate: (persisted) => {
+        const value = persisted as Partial<BuilderState>
+        const defaultProject = createDefaultProject()
+        const project = value.project ? normalizeProject(value.project) : defaultProject
+        const pages =
+          project.pages.length < defaultProject.pages.length
+            ? [...project.pages, ...defaultProject.pages.slice(project.pages.length)]
+            : project.pages
+        const nextProject = {
+          ...project,
+          pages,
+          defaultPageLayout: project.defaultPageLayout ?? defaultProject.defaultPageLayout,
+        }
+        const activePageId = nextProject.pages.some((page) => page.id === value.activePageId)
+          ? value.activePageId!
+          : nextProject.pages[0].id
 
         return {
-          project,
-          activePageId: project.pages[0].id,
-          previewZoom: 'fit',
-          showGuides: false,
+          ...value,
+          project: nextProject,
+          activePageId,
+          previewZoom: value.previewZoom ?? 'fit',
+          showGuides: value.showGuides ?? false,
           hasUnsavedChanges: true,
-          lastSavedAt: undefined,
+          lastSavedAt: value.lastSavedAt,
         }
       },
       merge: (persisted, current) => {

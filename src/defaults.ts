@@ -223,6 +223,72 @@ export function createDefaultProject(): PortfolioProject {
         disclaimer,
         heroImage: '/editable-rebuild/hero_03.jpg',
       }),
+      createPage({
+        ...sharedLayout,
+        name: 'Operational Sequence Storyboard',
+        pageNumber: '04',
+        title: 'Operational Sequence Storyboard',
+        subtitle:
+          'Real-time visual sequencing for inspection, maintenance, and component review within a nuclear infrastructure environment.',
+        paragraph1:
+          'This storyboard concept demonstrates how operational workflows can be communicated through clear visual sequencing, combining inspection routes, maintenance access, and component status review in a format designed for planning, technical communication, and operational understanding.',
+        sectionTitle: 'Operational Sequence Storyboard',
+        paragraph2:
+          'The sequence focuses on key stages of a service water system workflow and shows how interface layers, asset annotations, and procedural timing can support training, review, documentation, and decision-ready visualization.',
+        keyFocus: [
+          'storyboarding',
+          'operational sequences',
+          'inspection workflows',
+          'maintenance planning',
+          'technical communication',
+        ],
+        disclaimer,
+        heroImage: '/editable-rebuild/hero_04.jpg',
+      }),
+      createPage({
+        ...sharedLayout,
+        name: 'Live Data Interface',
+        pageNumber: '05',
+        title: 'Live Data Interface Concept',
+        subtitle:
+          'Real-time dashboard visualization for asset monitoring, system health, maintenance insight, and decision-ready digital twin communication.',
+        paragraph1:
+          'This page explores how real-time operational information can be integrated into a digital twin interface, combining spatial context, asset visibility, and system health into a clear presentation format for technical teams and stakeholders.',
+        sectionTitle: 'Live Data Interface',
+        paragraph2:
+          'The concept focuses on live monitoring, alert visibility, maintenance awareness, and asset-level understanding, showing how dashboard-driven visualization can support review, communication, and operational decision-making in complex infrastructure environments.',
+        keyFocus: [
+          'live monitoring',
+          'asset visibility',
+          'system health',
+          'maintenance insight',
+          'decision support',
+        ],
+        disclaimer,
+        heroImage: '/editable-rebuild/hero_05.jpg',
+      }),
+      createPage({
+        ...sharedLayout,
+        name: 'Stakeholder Review',
+        pageNumber: '06',
+        title: 'Stakeholder Review and Decision Support',
+        subtitle:
+          'High-impact real-time 3D presentation workflows for technical alignment, stakeholder communication, and informed decision-making.',
+        paragraph1:
+          'This page explores how real-time 3D visualization can be presented in a highly impactful format to support internal reviews, stakeholder communication, and multidisciplinary decision-making within complex nuclear infrastructure environments.',
+        sectionTitle: 'Stakeholder Review and Decision Support',
+        paragraph2:
+          'The concept emphasizes visual communication as a platform for alignment, buy-in, and technical clarity, showing how digital twin presentations can support collaboration, review workflows, and presentation-ready communication across teams.',
+        keyFocus: [
+          'stakeholder review',
+          'decision support',
+          'technical alignment',
+          'presentation impact',
+          'multidisciplinary communication',
+        ],
+        disclaimer,
+        heroImage: '/editable-rebuild/hero_06.jpg',
+      }),
     ],
   }
 }
