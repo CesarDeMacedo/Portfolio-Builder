@@ -4,7 +4,7 @@
 
 Portfolio Builder is a Vite + React + TypeScript app for creating editable portfolio and case-study pages, then exporting them as PNG or PDF.
 
-The current default project is a 3-page editable infrastructure digital twin portfolio rebuilt from a saved PDF reference. The default hero assets live in `public/editable-rebuild/`.
+The current default project is a 6-page editable infrastructure digital twin portfolio rebuilt from a saved PDF reference. It is defined as the default project template in `src/templates/infrastructureDigitalTwin.ts`. The default hero assets live in `public/editable-rebuild/`.
 
 ## Stack
 
@@ -32,7 +32,8 @@ http://127.0.0.1:5173
 
 - `src/App.tsx` - main UI, sidebar controls, preview, and portfolio page renderer
 - `src/store.ts` - Zustand state, project actions, unsaved-change tracking, persistence migration
-- `src/defaults.ts` - default project, default pages, layout presets, normalization helpers
+- `src/defaults.ts` - default constants, page factory, normalization helpers, default template entry point
+- `src/templates/` - project template registry and template definitions
 - `src/types.ts` - shared TypeScript types for projects and pages
 - `src/exportUtils.ts` - PNG and PDF export helpers
 - `src/fileUtils.ts` - JSON/image file helpers
@@ -62,6 +63,9 @@ Do not clear or overwrite `localStorage` unless the user explicitly asks. If the
 - Keep pages editable through the existing `PortfolioPage` data model whenever possible.
 - Avoid replacing editable pages with full-page screenshots unless the user explicitly asks for visual-only recovery.
 - If adding default project images, place them in `public/` and reference them with root-relative paths such as `/editable-rebuild/hero_01.jpg`.
+- New reusable layouts should be added as project templates in `src/templates/`.
+- Register templates from `src/templates/index.ts`.
+- Keep `src/defaults.ts` focused on factories, normalization, and delegating the default project to `defaultProjectTemplate`.
 - Preserve `Save Backup` and `Load Project` behavior when changing store persistence.
 - If changing persisted state shape, bump the Zustand persist `version` in `src/store.ts` and add/update `migrate`.
 - Do not commit `node_modules`, `dist`, logs, generated PDFs, or user Downloads files.
@@ -78,7 +82,7 @@ npm run lint
 For UI changes, also verify the local app manually or with Playwright when practical. Key checks:
 
 - The app loads at `http://127.0.0.1:5173`.
-- The default project shows 3 pages.
+- The default project shows 6 pages.
 - `Save Backup` downloads a JSON file.
 - `Load Project` can restore a saved JSON file.
 - `New Project` and `Duplicate Project` keep pages editable.
@@ -93,4 +97,3 @@ For UI changes, also verify the local app manually or with Playwright when pract
 feat: add project backup workflow
 docs: add agent guide
 ```
-
