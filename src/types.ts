@@ -1,6 +1,6 @@
 export type PageSize = '16:9' | '4:3' | 'A4 landscape' | '9:16'
 
-export type ExportQuality = 'web' | 'print' | 'high'
+export type ExportQuality = 'linkedin' | 'web' | 'print' | 'high'
 
 export type FitMode = 'cover' | 'contain'
 

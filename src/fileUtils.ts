@@ -72,9 +72,10 @@ export function sanitizeFilename(value: string) {
     .replace(/^_+|_+$/g, '') || 'BlackLab'
 }
 
-export function datedPdfName(projectName: string) {
+export function datedPdfName(projectName: string, suffix?: string) {
   const date = new Date().toISOString().slice(0, 10)
-  return `${sanitizeFilename(projectName)}_Portfolio_${date}.pdf`
+  const suffixPart = suffix ? `_${sanitizeFilename(suffix)}` : ''
+  return `${sanitizeFilename(projectName)}_Portfolio${suffixPart}_${date}.pdf`
 }
 
 export function normalizeProject(candidate: PortfolioProject): PortfolioProject {

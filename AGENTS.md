@@ -86,6 +86,7 @@ For UI changes, also verify the local app manually or with Playwright when pract
 - `Save Backup` downloads a JSON file.
 - `Load Project` can restore a saved JSON file.
 - `New Project` and `Duplicate Project` keep pages editable.
+- `Export quality` includes `linkedin`, which targets a PDF under 20 MB for LinkedIn messaging.
 
 ## Git Workflow
 

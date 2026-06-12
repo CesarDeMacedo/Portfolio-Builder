@@ -12,6 +12,7 @@ export function getCanvasSize(pageSize: PageSize) {
 }
 
 export function getExportScale(quality: string) {
+  if (quality === 'linkedin') return 1.5
   if (quality === 'web') return 2
   if (quality === 'high') return 4
   return 3

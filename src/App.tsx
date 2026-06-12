@@ -225,7 +225,7 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
         <SelectField<ExportQuality>
           label="Export quality"
           value={project.settings.exportQuality}
-          options={['web', 'print', 'high']}
+          options={['linkedin', 'web', 'print', 'high']}
           onChange={(value) => setSetting('exportQuality', value)}
         />
         <div className="action-grid project-actions">
