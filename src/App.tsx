@@ -143,7 +143,12 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
     previewZoom,
     showGuides,
     overflowWarning,
+    hasUnsavedChanges,
+    lastSavedAt,
     setProject,
+    newProject,
+    duplicateProject,
+    markProjectSaved,
     setSetting,
     setActivePage,
     updateActivePage,
@@ -156,14 +161,33 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
   } = useBuilderStore()
   const activePage = project.pages.find((page) => page.id === activePageId) ?? project.pages[0]
 
+  const savedAtLabel = lastSavedAt
+    ? new Intl.DateTimeFormat(undefined, {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(new Date(lastSavedAt))
+    : 'No backup saved'
+
   const saveJson = () => {
-    downloadText(JSON.stringify(project, null, 2), `${sanitizeFilename(project.settings.projectName)}_project.json`)
+    const timestamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '')
+    downloadText(JSON.stringify(project, null, 2), `${sanitizeFilename(project.settings.projectName)}_${timestamp}_project.json`)
+    markProjectSaved()
   }
 
   const loadJson = async (file: File) => {
     const text = await file.text()
     const loaded = normalizeProject(JSON.parse(text) as PortfolioProject)
     setProject(loaded)
+  }
+
+  const startNewProject = () => {
+    if (hasUnsavedChanges && !window.confirm('Current project has unsaved changes. Start a new project anyway?')) return
+    newProject()
+  }
+
+  const openProjectFile = () => {
+    if (hasUnsavedChanges && !window.confirm('Current project has unsaved changes. Load another project anyway?')) return
+    fileInputRef.current?.click()
   }
 
   const updateKeyFocus = (index: number, value: string) => {
@@ -181,6 +205,10 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
 
       <section className="panel">
         <h2>Project</h2>
+        <div className={`save-status ${hasUnsavedChanges ? 'is-unsaved' : ''}`}>
+          <strong>{hasUnsavedChanges ? 'Unsaved changes' : 'Backup saved'}</strong>
+          <span>{savedAtLabel}</span>
+        </div>
         <Field label="Project name" value={project.settings.projectName} onChange={(value) => setSetting('projectName', value)} />
         <Field
           label="Portfolio title"
@@ -199,6 +227,31 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
           value={project.settings.exportQuality}
           options={['web', 'print', 'high']}
           onChange={(value) => setSetting('exportQuality', value)}
+        />
+        <div className="action-grid project-actions">
+          <button onClick={startNewProject}>
+            <Plus size={15} /> New Project
+          </button>
+          <button onClick={duplicateProject}>
+            <Copy size={15} /> Duplicate Project
+          </button>
+          <button onClick={saveJson}>
+            <Save size={15} /> Save Backup
+          </button>
+          <button onClick={openProjectFile}>
+            <FolderOpen size={15} /> Load Project
+          </button>
+        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json"
+          hidden
+          onChange={(event) => {
+            const [file] = Array.from(event.target.files ?? [])
+            if (file) void loadJson(file)
+            event.currentTarget.value = ''
+          }}
         />
       </section>
 
@@ -465,24 +518,7 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
           >
             <FileDown size={15} /> Full PDF
           </button>
-          <button onClick={saveJson}>
-            <Save size={15} /> Save JSON
-          </button>
-          <button onClick={() => fileInputRef.current?.click()}>
-            <FolderOpen size={15} /> Load JSON
-          </button>
         </div>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="application/json"
-          hidden
-          onChange={(event) => {
-            const [file] = Array.from(event.target.files ?? [])
-            if (file) void loadJson(file)
-            event.currentTarget.value = ''
-          }}
-        />
       </section>
     </aside>
   )

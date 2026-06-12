@@ -9,7 +9,12 @@ type BuilderState = {
   previewZoom: 'fit' | 0.5 | 0.75 | 1
   showGuides: boolean
   overflowWarning: boolean
+  hasUnsavedChanges: boolean
+  lastSavedAt?: string
   setProject: (project: PortfolioProject) => void
+  newProject: () => void
+  duplicateProject: () => void
+  markProjectSaved: () => void
   setSetting: <K extends keyof PortfolioProject['settings']>(key: K, value: PortfolioProject['settings'][K]) => void
   setActivePage: (id: string) => void
   updateActivePage: (patch: Partial<PortfolioPage>) => void
@@ -25,6 +30,38 @@ type BuilderState = {
 }
 
 const defaultProject = createDefaultProject()
+
+function cloneProject(project: PortfolioProject): PortfolioProject {
+  const pages = project.pages.map((page) => ({
+    ...page,
+    id: crypto.randomUUID(),
+    keyFocus: [...page.keyFocus],
+    imageSettings: { ...page.imageSettings },
+    heroLayout: { ...page.heroLayout },
+    textLayout: { ...page.textLayout },
+    fontSettings: { ...page.fontSettings },
+    theme: { ...page.theme },
+  }))
+
+  return {
+    ...project,
+    settings: {
+      ...project.settings,
+      projectName: `${project.settings.projectName} Copy`,
+      portfolioTitle: `${project.settings.portfolioTitle} Copy`,
+    },
+    pages,
+    defaultPageLayout: project.defaultPageLayout
+      ? {
+          imageSettings: { ...project.defaultPageLayout.imageSettings },
+          heroLayout: { ...project.defaultPageLayout.heroLayout },
+          textLayout: { ...project.defaultPageLayout.textLayout },
+          fontSettings: { ...project.defaultPageLayout.fontSettings },
+          theme: { ...project.defaultPageLayout.theme },
+        }
+      : undefined,
+  }
+}
 
 function clonePage(page: PortfolioPage, pageNumber?: string): PortfolioPage {
   return {
@@ -49,11 +86,48 @@ export const useBuilderStore = create<BuilderState>()(
       previewZoom: 'fit',
       showGuides: false,
       overflowWarning: false,
+      hasUnsavedChanges: false,
+      lastSavedAt: undefined,
       setProject: (project) =>
+        set(() => {
+          const normalized = normalizeProject(project)
+
+          return {
+            project: normalized,
+            activePageId: normalized.pages[0]?.id ?? createDefaultProject().pages[0].id,
+            overflowWarning: false,
+            hasUnsavedChanges: false,
+            lastSavedAt: new Date().toISOString(),
+          }
+        }),
+      newProject: () =>
+        set(() => {
+          const project = createDefaultProject()
+
+          return {
+            project,
+            activePageId: project.pages[0].id,
+            overflowWarning: false,
+            hasUnsavedChanges: true,
+            lastSavedAt: undefined,
+          }
+        }),
+      duplicateProject: () =>
+        set((state) => {
+          const project = cloneProject(state.project)
+
+          return {
+            project,
+            activePageId: project.pages[0]?.id ?? state.activePageId,
+            overflowWarning: false,
+            hasUnsavedChanges: true,
+            lastSavedAt: undefined,
+          }
+        }),
+      markProjectSaved: () =>
         set({
-          project: normalizeProject(project),
-          activePageId: project.pages[0]?.id ?? createDefaultProject().pages[0].id,
-          overflowWarning: false,
+          hasUnsavedChanges: false,
+          lastSavedAt: new Date().toISOString(),
         }),
       setSetting: (key, value) =>
         set((state) => ({
@@ -61,6 +135,7 @@ export const useBuilderStore = create<BuilderState>()(
             ...state.project,
             settings: { ...state.project.settings, [key]: value },
           },
+          hasUnsavedChanges: true,
         })),
       setActivePage: (id) => set({ activePageId: id }),
       updateActivePage: (patch) => {
@@ -73,6 +148,7 @@ export const useBuilderStore = create<BuilderState>()(
             ...state.project,
             pages: state.project.pages.map((page) => (page.id === id ? { ...page, ...patch } : page)),
           },
+          hasUnsavedChanges: true,
         })),
       addPage: () =>
         set((state) => {
@@ -85,6 +161,7 @@ export const useBuilderStore = create<BuilderState>()(
           return {
             project: { ...state.project, pages: [...state.project.pages, page] },
             activePageId: page.id,
+            hasUnsavedChanges: true,
           }
         }),
       duplicatePage: (id) =>
@@ -94,14 +171,14 @@ export const useBuilderStore = create<BuilderState>()(
           const duplicate = clonePage(state.project.pages[index], String(state.project.pages.length + 1).padStart(2, '0'))
           const pages = [...state.project.pages]
           pages.splice(index + 1, 0, duplicate)
-          return { project: { ...state.project, pages }, activePageId: duplicate.id }
+          return { project: { ...state.project, pages }, activePageId: duplicate.id, hasUnsavedChanges: true }
         }),
       deletePage: (id) =>
         set((state) => {
           if (state.project.pages.length === 1) return state
           const pages = state.project.pages.filter((page) => page.id !== id)
           const activePageId = state.activePageId === id ? pages[0].id : state.activePageId
-          return { project: { ...state.project, pages }, activePageId }
+          return { project: { ...state.project, pages }, activePageId, hasUnsavedChanges: true }
         }),
       movePage: (id, direction) =>
         set((state) => {
@@ -111,7 +188,7 @@ export const useBuilderStore = create<BuilderState>()(
           const pages = [...state.project.pages]
           const [page] = pages.splice(index, 1)
           pages.splice(nextIndex, 0, page)
-          return { project: { ...state.project, pages } }
+          return { project: { ...state.project, pages }, hasUnsavedChanges: true }
         }),
       saveActiveLayoutAsDefault: () =>
         set((state) => {
@@ -122,6 +199,7 @@ export const useBuilderStore = create<BuilderState>()(
               ...state.project,
               defaultPageLayout: createLayoutPreset(activePage),
             },
+            hasUnsavedChanges: true,
           }
         }),
       setPreviewZoom: (previewZoom) => set({ previewZoom }),
@@ -130,6 +208,7 @@ export const useBuilderStore = create<BuilderState>()(
     }),
     {
       name: 'black-lab-portfolio-builder',
+      version: 4,
       storage: createJSONStorage(() => ({
         getItem: (name) => localStorage.getItem(name),
         setItem: (name, value) => {
@@ -146,7 +225,21 @@ export const useBuilderStore = create<BuilderState>()(
         activePageId: state.activePageId,
         previewZoom: state.previewZoom,
         showGuides: state.showGuides,
+        hasUnsavedChanges: state.hasUnsavedChanges,
+        lastSavedAt: state.lastSavedAt,
       }),
+      migrate: () => {
+        const project = createDefaultProject()
+
+        return {
+          project,
+          activePageId: project.pages[0].id,
+          previewZoom: 'fit',
+          showGuides: false,
+          hasUnsavedChanges: true,
+          lastSavedAt: undefined,
+        }
+      },
       merge: (persisted, current) => {
         const value = persisted as Partial<BuilderState>
         const project = value.project ? normalizeProject(value.project) : current.project
@@ -155,6 +248,8 @@ export const useBuilderStore = create<BuilderState>()(
           ...value,
           project,
           activePageId: project.pages.some((page) => page.id === value.activePageId) ? value.activePageId! : project.pages[0].id,
+          hasUnsavedChanges: value.hasUnsavedChanges ?? current.hasUnsavedChanges,
+          lastSavedAt: value.lastSavedAt,
         }
       },
     },
