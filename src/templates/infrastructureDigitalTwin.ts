@@ -35,6 +35,7 @@ export const infrastructureDigitalTwinTemplate: ProjectTemplate = {
 
     return {
       version: 1,
+      templateId: 'infrastructure-digital-twin',
       settings: {
         projectName: 'Black Lab Portfolio',
         portfolioTitle: 'Infrastructure Digital Twin Portfolio',

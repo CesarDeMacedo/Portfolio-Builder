@@ -1,0 +1,47 @@
+export const WSP_TEMPLATE_TOKENS = {
+  pagePaddingX: 96,
+  topAccent: {
+    x: 96,
+    y: 76,
+    width: 132,
+    height: 6,
+  },
+  copy: {
+    x: 96,
+    y: 132,
+    width: 560,
+  },
+  heroImage: {
+    x: 684,
+    y: 150,
+    width: 820,
+    height: 461,
+    aspectRatio: 16 / 9,
+    accentHeight: 7,
+  },
+  footer: {
+    left: 96,
+    right: 96,
+    bottom: 62,
+    paddingTop: 22,
+    gap: 32,
+  },
+  type: {
+    eyebrow: 16,
+    title: 52,
+    subtitle: 20,
+    footer: 16,
+    footerNumber: 23,
+    cardNumber: 12,
+    cardTitle: 18,
+    cardDescription: 14,
+  },
+  profile: {
+    titleIntroSpacing: 16,
+    cardsGap: 18,
+    cardPadding: 16,
+    cardsTopGap: 28,
+    cardsBottom: 118,
+    cardMinHeight: 82,
+  },
+}

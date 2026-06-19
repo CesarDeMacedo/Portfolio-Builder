@@ -166,6 +166,57 @@ button {
   accent-color: #168ec3;
 }
 
+.card-editor-list {
+  display: grid;
+  gap: 12px;
+}
+
+.card-editor {
+  border: 1px solid #d6e0e7;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.card-editor-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.card-editor-title strong {
+  color: #071b35;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.card-editor-title div {
+  display: flex;
+  gap: 5px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.number-slider-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 78px;
+  align-items: center;
+  gap: 8px;
+}
+
+.number-slider-row input[type="range"] {
+  min-width: 0;
+}
+
+.number-slider-input {
+  text-align: right;
+}
+
 .color-field {
   display: grid;
   grid-template-columns: 1fr 42px 112px;
@@ -605,5 +656,291 @@ button {
 }
 
 .is-exporting .safe-guides {
+  display: none;
+}
+
+.wsp-cover-canvas {
+  background: #f7f8f8;
+}
+
+.wsp-cover-top-accent {
+  position: absolute;
+  left: 96px;
+  top: 76px;
+  width: 132px;
+  height: 6px;
+}
+
+.wsp-cover-copy {
+  position: absolute;
+  left: 96px;
+  top: 132px;
+  width: 650px;
+  max-height: 430px;
+  overflow: hidden;
+}
+
+.wsp-cover-eyebrow {
+  display: block;
+  margin-bottom: 28px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.wsp-cover-copy h1 {
+  max-width: 620px;
+  margin: 0;
+  font-weight: 850;
+  line-height: .98;
+  letter-spacing: 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.wsp-cover-subtitle {
+  margin: 26px 0 0;
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.wsp-cover-hero {
+  position: absolute;
+  overflow: hidden;
+  background: #e6e9eb;
+  box-shadow: 0 22px 54px rgba(32, 38, 45, .16);
+}
+
+.wsp-cover-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.wsp-cover-image-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: 7px;
+}
+
+.wsp-cover-hero-empty {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  color: #7a838c;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.wsp-cover-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #000;
+  pointer-events: none;
+}
+
+.wsp-cover-footer {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  bottom: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-top: 1px solid #c9ced3;
+  padding-top: 22px;
+}
+
+.wsp-cover-footer strong {
+  color: #20262d;
+  font-weight: 850;
+}
+
+.wsp-cover-footer span {
+  max-width: 920px;
+  font-weight: 650;
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.is-exporting .wsp-cover-hero-empty {
+  color: transparent;
+}
+
+.is-exporting .wsp-cover-hero-empty svg {
+  display: none;
+}
+
+.wsp-profile-canvas {
+  background: #f7f8f8;
+}
+
+.wsp-profile-top-accent {
+  position: absolute;
+  left: 96px;
+  top: 76px;
+  width: 132px;
+  height: 6px;
+}
+
+.wsp-profile-copy {
+  position: absolute;
+  left: 96px;
+  top: 106px;
+  z-index: 2;
+  width: 435px;
+  max-height: 292px;
+  overflow: hidden;
+}
+
+.wsp-profile-eyebrow {
+  display: block;
+  margin-bottom: 28px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.wsp-profile-copy h1 {
+  margin: 0;
+  font-weight: 850;
+  line-height: .98;
+  letter-spacing: 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.wsp-profile-intro {
+  max-width: 850px;
+  margin: 0;
+  color: #4d5964;
+  font-weight: 520;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.wsp-profile-hero-image {
+  position: absolute;
+  top: 112px;
+  overflow: hidden;
+  background: #e6e9eb;
+  box-shadow: 0 22px 54px rgba(32, 38, 45, .14);
+}
+
+.wsp-profile-hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.wsp-profile-image-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: 7px;
+}
+
+.wsp-profile-card-band {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  bottom: 118px;
+  overflow: hidden;
+}
+
+.wsp-profile-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.wsp-profile-canvas.is-grid .wsp-profile-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 920px;
+  margin-left: auto;
+}
+
+.wsp-profile-card {
+  position: relative;
+  min-height: 82px;
+  border-top: 1px solid rgba(32, 38, 45, .16);
+  background: rgba(255, 255, 255, .3);
+}
+
+.wsp-profile-card-mark {
+  margin-bottom: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.wsp-profile-card h2 {
+  margin: 0 0 7px;
+  font-weight: 820;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.wsp-profile-card p {
+  margin: 0;
+  color: #52606b;
+  font-weight: 500;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+}
+
+.wsp-profile-card-rule {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 4px;
+}
+
+.wsp-profile-side-empty {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  color: #7a838c;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.wsp-profile-footer {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  bottom: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-top: 1px solid #c9ced3;
+  padding-top: 22px;
+  color: #5a646f;
+  font-weight: 650;
+}
+
+.wsp-profile-footer strong {
+  color: #20262d;
+  font-weight: 850;
+}
+
+.is-exporting .wsp-profile-side-empty {
+  color: transparent;
+}
+
+.is-exporting .wsp-profile-side-empty svg {
   display: none;
 }

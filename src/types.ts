@@ -2,6 +2,14 @@ export type PageSize = '16:9' | '4:3' | 'A4 landscape' | '9:16'
 
 export type ExportQuality = 'linkedin' | 'web' | 'print' | 'high'
 
+export type TemplateId = 'infrastructure-digital-twin' | 'wsp-digital-advisory'
+
+export type WspLayoutType = 'cover' | 'profile'
+
+export type WspProfileComposition = 'horizontal' | 'grid'
+
+export type WspProfileImageAlignment = 'left' | 'center' | 'right'
+
 export type FitMode = 'cover' | 'contain'
 
 export type ThemeSettings = {
@@ -46,6 +54,62 @@ export type PageLayoutPreset = {
   theme: ThemeSettings
 }
 
+export type WspCoverPageContent = {
+  eyebrow: string
+  title: string
+  subtitle: string
+  professionalName: string
+  professionalRole: string
+  heroImage?: string
+  imageFit: FitMode
+  imagePositionX: number
+  imagePositionY: number
+  imageScale: number
+  overlayOpacity: number
+  showTopAccent: boolean
+  showImageAccent: boolean
+}
+
+export type WspProfileCard = {
+  id: string
+  title: string
+  description: string
+  icon?: string
+}
+
+export type WspProfilePageContent = {
+  eyebrow: string
+  title: string
+  introduction: string
+  cards: WspProfileCard[]
+  composition: WspProfileComposition
+  sideImage?: string
+  imageFit: FitMode
+  imagePositionX: number
+  imagePositionY: number
+  imageScale: number
+  imageWidth: number
+  imageHeight: number
+  imageAlignment: WspProfileImageAlignment
+  eyebrowFontSize: number
+  titleFontSize: number
+  introductionFontSize: number
+  cardTitleFontSize: number
+  cardDescriptionFontSize: number
+  cardLabelFontSize: number
+  footerFontSize: number
+  cardsGap: number
+  cardPadding: number
+  titleIntroSpacing: number
+  introCardsSpacing: number
+  footerLabel: string
+  pageNumber: string
+  showTopAccent: boolean
+  showImageAccent: boolean
+  showSideImage: boolean
+  showFooter: boolean
+}
+
 export type PortfolioPage = {
   id: string
   name: string
@@ -66,6 +130,9 @@ export type PortfolioPage = {
   textLayout: TextLayout
   fontSettings: FontSettings
   theme: ThemeSettings
+  layoutType?: WspLayoutType
+  wspCover?: WspCoverPageContent
+  wspProfile?: WspProfilePageContent
 }
 
 export type ProjectSettings = {
@@ -78,6 +145,7 @@ export type ProjectSettings = {
 
 export type PortfolioProject = {
   version: 1
+  templateId: TemplateId
   settings: ProjectSettings
   pages: PortfolioPage[]
   defaultPageLayout?: PageLayoutPreset

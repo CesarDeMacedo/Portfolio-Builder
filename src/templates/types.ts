@@ -1,4 +1,4 @@
-import type { PortfolioPage, PortfolioProject, ThemeSettings } from '../types'
+import type { PortfolioPage, PortfolioProject, TemplateId, ThemeSettings } from '../types'
 
 export type CreatePage = (overrides?: Partial<PortfolioPage>) => PortfolioPage
 
@@ -8,7 +8,7 @@ export type ProjectTemplateContext = {
 }
 
 export type ProjectTemplate = {
-  id: string
+  id: TemplateId
   name: string
   description: string
   createProject: (context: ProjectTemplateContext) => PortfolioProject

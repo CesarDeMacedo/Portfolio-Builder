@@ -1,5 +1,20 @@
-import type { FontSettings, HeroLayout, ImageSettings, PageLayoutPreset, PortfolioPage, PortfolioProject, TextLayout, ThemeSettings } from './types'
-import { defaultProjectTemplate } from './templates'
+import type {
+  FontSettings,
+  HeroLayout,
+  ImageSettings,
+  PageLayoutPreset,
+  PortfolioPage,
+  PortfolioProject,
+  TemplateId,
+  TextLayout,
+  ThemeSettings,
+  WspCoverPageContent,
+  WspProfileComposition,
+  WspProfileImageAlignment,
+  WspProfilePageContent,
+} from './types'
+import { defaultProjectTemplate, getProjectTemplate } from './templates'
+import { WSP_TEMPLATE_TOKENS } from './wspTokens'
 
 export const defaultTheme: ThemeSettings = {
   backgroundColor: '#f4f7f8',
@@ -59,13 +74,180 @@ export function normalizePage(page: PortfolioPage): PortfolioPage {
   }
 }
 
-export function normalizeProject(project: PortfolioProject): PortfolioProject {
+export function createDefaultWspCoverContent(
+  page?: Partial<PortfolioPage>,
+  professionalName = 'Cesar De Macedo',
+): WspCoverPageContent {
+  const imageSettings = { ...defaultImageSettings, ...page?.imageSettings }
+
+  return {
+    eyebrow:
+      page?.wspCover?.eyebrow ??
+      (page?.topLabel === 'WSP DIGITAL ADVISORY PORTFOLIO' ? 'DIGITAL ADVISORY PORTFOLIO' : page?.topLabel) ??
+      'DIGITAL ADVISORY PORTFOLIO',
+    title: page?.wspCover?.title ?? page?.title ?? 'Digital Experience &\nReal-Time Visualization',
+    subtitle: page?.wspCover?.subtitle ?? page?.subtitle ?? 'For the Built Environment',
+    professionalName: page?.wspCover?.professionalName ?? professionalName,
+    professionalRole:
+      page?.wspCover?.professionalRole ??
+      page?.paragraph1 ??
+      'Digital Experience & Real-Time Visualization Specialist',
+    heroImage: page?.wspCover?.heroImage ?? page?.heroImage,
+    imageFit: page?.wspCover?.imageFit ?? imageSettings.fit,
+    imagePositionX: page?.wspCover?.imagePositionX ?? imageSettings.x,
+    imagePositionY: page?.wspCover?.imagePositionY ?? imageSettings.y,
+    imageScale: page?.wspCover?.imageScale ?? imageSettings.zoom,
+    overlayOpacity: page?.wspCover?.overlayOpacity ?? 0,
+    showTopAccent: page?.wspCover?.showTopAccent ?? true,
+    showImageAccent: page?.wspCover?.showImageAccent ?? true,
+  }
+}
+
+function createProfileCard(title: string, description: string, icon: string) {
+  return {
+    id: crypto.randomUUID(),
+    title,
+    description,
+    icon,
+  }
+}
+
+function normalizeProfileComposition(composition?: string): WspProfileComposition {
+  if (composition === 'grid' || composition === 'three-focus') return 'grid'
+  return 'horizontal'
+}
+
+function normalizeProfileImageAlignment(alignment?: string): WspProfileImageAlignment {
+  if (alignment === 'left' || alignment === 'center' || alignment === 'right') return alignment
+  return 'right'
+}
+
+export function createDefaultWspProfileContent(page?: Partial<PortfolioPage>): WspProfilePageContent {
+  const imageSettings = { ...defaultImageSettings, ...page?.imageSettings }
+
+  return {
+    eyebrow: page?.wspProfile?.eyebrow ?? 'DIGITAL ADVISORY',
+    title: page?.wspProfile?.title ?? 'How I Could Support\nDigital Advisory',
+    introduction:
+      page?.wspProfile?.introduction ??
+      'Transforming complex systems and project information into clear, interactive digital experiences.',
+    cards: (page?.wspProfile?.cards?.length ? page.wspProfile.cards : [
+      createProfileCard(
+        'Real-Time Visualization',
+        'Interactive environments for review and communication.',
+        '01',
+      ),
+      createProfileCard(
+        'Experience Prototyping',
+        'Concepts for smart buildings and digital twins.',
+        '02',
+      ),
+      createProfileCard(
+        'Interactive Applications',
+        'Web-based tools combining data and storytelling.',
+        '03',
+      ),
+      createProfileCard(
+        'Technical Communication',
+        'Visual narratives for complex systems and workflows.',
+        '04',
+      ),
+    ]).slice(0, 4).map((card) => ({ ...card, id: card.id || crypto.randomUUID() })),
+    composition: normalizeProfileComposition(page?.wspProfile?.composition),
+    sideImage: page?.wspProfile?.sideImage ?? page?.heroImage,
+    imageFit: page?.wspProfile?.imageFit ?? imageSettings.fit,
+    imagePositionX: page?.wspProfile?.imagePositionX ?? imageSettings.x,
+    imagePositionY: page?.wspProfile?.imagePositionY ?? imageSettings.y,
+    imageScale: page?.wspProfile?.imageScale ?? imageSettings.zoom,
+    imageWidth: WSP_TEMPLATE_TOKENS.heroImage.width,
+    imageHeight: WSP_TEMPLATE_TOKENS.heroImage.height,
+    imageAlignment: normalizeProfileImageAlignment(page?.wspProfile?.imageAlignment),
+    eyebrowFontSize: WSP_TEMPLATE_TOKENS.type.eyebrow,
+    titleFontSize: WSP_TEMPLATE_TOKENS.type.title,
+    introductionFontSize: WSP_TEMPLATE_TOKENS.type.subtitle,
+    cardTitleFontSize: WSP_TEMPLATE_TOKENS.type.cardTitle,
+    cardDescriptionFontSize: WSP_TEMPLATE_TOKENS.type.cardDescription,
+    cardLabelFontSize: WSP_TEMPLATE_TOKENS.type.cardNumber,
+    footerFontSize: WSP_TEMPLATE_TOKENS.type.footer,
+    cardsGap: WSP_TEMPLATE_TOKENS.profile.cardsGap,
+    cardPadding: WSP_TEMPLATE_TOKENS.profile.cardPadding,
+    titleIntroSpacing: WSP_TEMPLATE_TOKENS.profile.titleIntroSpacing,
+    introCardsSpacing: page?.wspProfile?.introCardsSpacing ?? 0,
+    footerLabel: page?.wspProfile?.footerLabel ?? 'Cesar De Macedo · Digital Experience & Real-Time Visualization',
+    pageNumber: page?.wspProfile?.pageNumber ?? page?.pageNumber ?? '02',
+    showTopAccent: page?.wspProfile?.showTopAccent ?? true,
+    showImageAccent: page?.wspProfile?.showImageAccent ?? true,
+    showSideImage: page?.wspProfile?.showSideImage ?? true,
+    showFooter: page?.wspProfile?.showFooter ?? true,
+  }
+}
+
+function normalizeWspCoverPage(page: PortfolioPage, professionalName?: string): PortfolioPage {
+  const wspCover = createDefaultWspCoverContent(page, professionalName)
+
+  return {
+    ...page,
+    layoutType: 'cover',
+    topLabel: wspCover.eyebrow,
+    title: wspCover.title,
+    subtitle: wspCover.subtitle,
+    paragraph1: wspCover.professionalRole,
+    heroImage: wspCover.heroImage,
+    imageSettings: {
+      fit: wspCover.imageFit,
+      x: wspCover.imagePositionX,
+      y: wspCover.imagePositionY,
+      zoom: wspCover.imageScale,
+    },
+    wspCover,
+  }
+}
+
+function normalizeWspProfilePage(page: PortfolioPage): PortfolioPage {
+  const wspProfile = createDefaultWspProfileContent(page)
+
+  return {
+    ...page,
+    layoutType: 'profile',
+    topLabel: wspProfile.eyebrow,
+    title: wspProfile.title,
+    subtitle: wspProfile.introduction,
+    paragraph1: wspProfile.footerLabel,
+    pageNumber: wspProfile.pageNumber,
+    heroImage: wspProfile.sideImage,
+    imageSettings: {
+      fit: wspProfile.imageFit,
+      x: wspProfile.imagePositionX,
+      y: wspProfile.imagePositionY,
+      zoom: wspProfile.imageScale,
+    },
+    wspProfile,
+  }
+}
+
+function isTemplateId(value: unknown): value is TemplateId {
+  return value === 'infrastructure-digital-twin' || value === 'wsp-digital-advisory'
+}
+
+export function normalizeProject(project: PortfolioProject | (Partial<PortfolioProject> & { pages?: PortfolioPage[] })): PortfolioProject {
   const fallback = createDefaultProject()
-  const pages = Array.isArray(project.pages) && project.pages.length > 0 ? project.pages.map(normalizePage) : fallback.pages
+  const templateId = isTemplateId(project.templateId) ? project.templateId : defaultProjectTemplate.id
+  const settings = { ...fallback.settings, ...project.settings }
+  const pages =
+    Array.isArray(project.pages) && project.pages.length > 0
+      ? project.pages.map(normalizePage).map((page) =>
+          templateId === 'wsp-digital-advisory'
+            ? page.layoutType === 'profile'
+              ? normalizeWspProfilePage(page)
+              : normalizeWspCoverPage(page, settings.authorName)
+            : page,
+        )
+      : fallback.pages
 
   return {
     version: 1,
-    settings: { ...fallback.settings, ...project.settings },
+    templateId,
+    settings,
     pages,
     defaultPageLayout: project.defaultPageLayout
       ? {
@@ -122,4 +304,8 @@ export function createPage(overrides: Partial<PortfolioPage> = {}): PortfolioPag
 
 export function createDefaultProject(): PortfolioProject {
   return defaultProjectTemplate.createProject({ createPage, defaultTheme })
+}
+
+export function createProjectFromTemplate(templateId: TemplateId): PortfolioProject {
+  return getProjectTemplate(templateId).createProject({ createPage, defaultTheme })
 }
