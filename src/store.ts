@@ -2,15 +2,14 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import {
   createDefaultProject,
-  createDefaultWspCoverContent,
-  createDefaultWspProfileContent,
+  createDefaultWspDigitalContent,
   createLayoutPreset,
   createPage,
   createProjectFromTemplate,
+  getSixteenNineHeight,
   normalizeProject,
 } from './defaults'
-import type { PortfolioPage, PortfolioProject, TemplateId, WspProfileComposition, WspProfilePageContent } from './types'
-import { WSP_TEMPLATE_TOKENS } from './wspTokens'
+import type { PortfolioPage, PortfolioProject, TemplateId } from './types'
 
 type BuilderState = {
   project: PortfolioProject
@@ -55,6 +54,9 @@ function cloneProject(project: PortfolioProject): PortfolioProject {
     wspProfile: page.wspProfile
       ? { ...page.wspProfile, cards: page.wspProfile.cards.map((card) => ({ ...card })) }
       : undefined,
+    wspDigital: page.wspDigital
+      ? { ...page.wspDigital, keyFocusItems: [...page.wspDigital.keyFocusItems], fontSizes: { ...page.wspDigital.fontSizes } }
+      : undefined,
   }))
 
   return {
@@ -93,80 +95,41 @@ function clonePage(page: PortfolioPage, pageNumber?: string): PortfolioPage {
     wspProfile: page.wspProfile
       ? { ...page.wspProfile, cards: page.wspProfile.cards.map((card) => ({ ...card })) }
       : undefined,
+    wspDigital: page.wspDigital
+      ? { ...page.wspDigital, keyFocusItems: [...page.wspDigital.keyFocusItems], fontSizes: { ...page.wspDigital.fontSizes } }
+      : undefined,
   }
 }
 
-function syncWspCoverPage(page: PortfolioPage, authorName: string): PortfolioPage {
-  const cover = {
-    ...createDefaultWspCoverContent(page, authorName),
-    ...page.wspCover,
+function syncWspDigitalPage(page: PortfolioPage, footerName: string): PortfolioPage {
+  const content = createDefaultWspDigitalContent(page, footerName)
+  const heroLayout = {
+    ...page.heroLayout,
+    height: getSixteenNineHeight(page.heroLayout.width),
   }
 
   return {
     ...page,
-    layoutType: 'cover',
-    topLabel: cover.eyebrow,
-    title: cover.title,
-    subtitle: cover.subtitle,
-    paragraph1: cover.professionalRole,
-    heroImage: cover.heroImage,
+    layoutType: undefined,
+    topLabel: content.eyebrow,
+    title: content.title,
+    subtitle: content.subtitle,
+    pageNumber: content.pageNumber,
+    caseStudyLabel: content.pageCategory,
+    paragraph1: content.primaryDescription,
+    sectionTitle: content.secondarySectionTitle,
+    paragraph2: content.secondaryDescription,
+    heroImage: content.heroImage,
     imageSettings: {
-      fit: cover.imageFit,
-      x: cover.imagePositionX,
-      y: cover.imagePositionY,
-      zoom: cover.imageScale,
+      fit: content.imageFit,
+      x: content.imagePositionX,
+      y: content.imagePositionY,
+      zoom: content.imageScale,
     },
-    wspCover: cover,
-  }
-}
-
-function syncWspProfilePage(page: PortfolioPage): PortfolioPage {
-  const profile = {
-    ...createDefaultWspProfileContent(page),
-    ...page.wspProfile,
-    cards: (page.wspProfile?.cards ?? createDefaultWspProfileContent(page).cards).slice(0, 4).map((card) => ({ ...card })),
-  }
-  const persistedComposition = profile.composition as string
-  const composition: WspProfileComposition =
-    persistedComposition === 'grid' || persistedComposition === 'three-focus' ? 'grid' : 'horizontal'
-  const imageAlignment =
-    profile.imageAlignment === 'left' || profile.imageAlignment === 'center' || profile.imageAlignment === 'right'
-      ? profile.imageAlignment
-      : 'right'
-  const normalizedProfile = {
-    ...profile,
-    composition,
-    imageAlignment,
-    imageWidth: WSP_TEMPLATE_TOKENS.heroImage.width,
-    imageHeight: WSP_TEMPLATE_TOKENS.heroImage.height,
-    eyebrowFontSize: WSP_TEMPLATE_TOKENS.type.eyebrow,
-    titleFontSize: WSP_TEMPLATE_TOKENS.type.title,
-    introductionFontSize: WSP_TEMPLATE_TOKENS.type.subtitle,
-    cardTitleFontSize: WSP_TEMPLATE_TOKENS.type.cardTitle,
-    cardDescriptionFontSize: WSP_TEMPLATE_TOKENS.type.cardDescription,
-    cardLabelFontSize: WSP_TEMPLATE_TOKENS.type.cardNumber,
-    footerFontSize: WSP_TEMPLATE_TOKENS.type.footer,
-    cardsGap: WSP_TEMPLATE_TOKENS.profile.cardsGap,
-    cardPadding: WSP_TEMPLATE_TOKENS.profile.cardPadding,
-    titleIntroSpacing: WSP_TEMPLATE_TOKENS.profile.titleIntroSpacing,
-  }
-
-  return {
-    ...page,
-    layoutType: 'profile',
-    topLabel: normalizedProfile.eyebrow,
-    title: normalizedProfile.title,
-    subtitle: normalizedProfile.introduction,
-    paragraph1: normalizedProfile.footerLabel,
-    pageNumber: normalizedProfile.pageNumber,
-    heroImage: normalizedProfile.sideImage,
-    imageSettings: {
-      fit: normalizedProfile.imageFit,
-      x: normalizedProfile.imagePositionX,
-      y: normalizedProfile.imagePositionY,
-      zoom: normalizedProfile.imageScale,
-    },
-    wspProfile: normalizedProfile,
+    heroLayout,
+    keyFocus: [...content.keyFocusItems],
+    disclaimer: content.footerNote,
+    wspDigital: content,
   }
 }
 
@@ -255,61 +218,7 @@ export const useBuilderStore = create<BuilderState>()(
               if (page.id !== id) return page
               const nextPage = { ...page, ...patch }
               if (state.project.templateId !== 'wsp-digital-advisory') return nextPage
-              if (patch.layoutType === 'profile' || nextPage.layoutType === 'profile') {
-                const currentProfile = createDefaultWspProfileContent(page)
-                const hasPageField = (field: keyof PortfolioPage) => Object.prototype.hasOwnProperty.call(patch, field)
-                const hasProfileField = (field: keyof WspProfilePageContent) =>
-                  Boolean(patch.wspProfile && Object.prototype.hasOwnProperty.call(patch.wspProfile, field))
-                return syncWspProfilePage({
-                  ...nextPage,
-                  wspCover: page.wspCover,
-                  wspProfile: {
-                    ...currentProfile,
-                    ...patch.wspProfile,
-                    eyebrow: patch.topLabel ?? patch.wspProfile?.eyebrow ?? currentProfile.eyebrow,
-                    title: patch.title ?? patch.wspProfile?.title ?? currentProfile.title,
-                    introduction: patch.subtitle ?? patch.wspProfile?.introduction ?? currentProfile.introduction,
-                    footerLabel: patch.paragraph1 ?? patch.wspProfile?.footerLabel ?? currentProfile.footerLabel,
-                    pageNumber: patch.pageNumber ?? patch.wspProfile?.pageNumber ?? currentProfile.pageNumber,
-                    sideImage: hasPageField('heroImage')
-                      ? patch.heroImage
-                      : hasProfileField('sideImage')
-                        ? patch.wspProfile?.sideImage
-                        : currentProfile.sideImage,
-                    imageFit: patch.imageSettings?.fit ?? patch.wspProfile?.imageFit ?? currentProfile.imageFit,
-                    imagePositionX: patch.imageSettings?.x ?? patch.wspProfile?.imagePositionX ?? currentProfile.imagePositionX,
-                    imagePositionY: patch.imageSettings?.y ?? patch.wspProfile?.imagePositionY ?? currentProfile.imagePositionY,
-                    imageScale: patch.imageSettings?.zoom ?? patch.wspProfile?.imageScale ?? currentProfile.imageScale,
-                  },
-                })
-              }
-              const currentCover = createDefaultWspCoverContent(page, state.project.settings.authorName)
-              const hasPageField = (field: keyof PortfolioPage) => Object.prototype.hasOwnProperty.call(patch, field)
-              const hasCoverField = (field: keyof NonNullable<PortfolioPage['wspCover']>) =>
-                Boolean(patch.wspCover && Object.prototype.hasOwnProperty.call(patch.wspCover, field))
-              return syncWspCoverPage(
-                {
-                  ...nextPage,
-                  wspCover: {
-                    ...currentCover,
-                    ...patch.wspCover,
-                    eyebrow: patch.topLabel ?? patch.wspCover?.eyebrow ?? currentCover.eyebrow,
-                    title: patch.title ?? patch.wspCover?.title ?? currentCover.title,
-                    subtitle: patch.subtitle ?? patch.wspCover?.subtitle ?? currentCover.subtitle,
-                    professionalRole: patch.paragraph1 ?? patch.wspCover?.professionalRole ?? currentCover.professionalRole,
-                    heroImage: hasPageField('heroImage')
-                      ? patch.heroImage
-                      : hasCoverField('heroImage')
-                        ? patch.wspCover?.heroImage
-                        : currentCover.heroImage,
-                    imageFit: patch.imageSettings?.fit ?? patch.wspCover?.imageFit ?? currentCover.imageFit,
-                    imagePositionX: patch.imageSettings?.x ?? patch.wspCover?.imagePositionX ?? currentCover.imagePositionX,
-                    imagePositionY: patch.imageSettings?.y ?? patch.wspCover?.imagePositionY ?? currentCover.imagePositionY,
-                    imageScale: patch.imageSettings?.zoom ?? patch.wspCover?.imageScale ?? currentCover.imageScale,
-                  },
-                },
-                state.project.settings.authorName,
-              )
+              return syncWspDigitalPage(nextPage, state.project.settings.authorName)
             }),
           },
           hasUnsavedChanges: true,
@@ -324,24 +233,18 @@ export const useBuilderStore = create<BuilderState>()(
           })
           const page =
             state.project.templateId === 'wsp-digital-advisory'
-              ? syncWspCoverPage(
+              ? syncWspDigitalPage(
                   {
                     ...pageBase,
-                    layoutType: 'cover',
-                    topLabel: 'DIGITAL ADVISORY PORTFOLIO',
-                    title: 'Digital Experience &\nReal-Time Visualization',
-                    subtitle: 'For the Built Environment',
-                    paragraph1: 'Digital Experience & Real-Time Visualization Specialist',
-                    wspCover: createDefaultWspCoverContent(
-                      {
-                        ...pageBase,
-                        topLabel: 'DIGITAL ADVISORY PORTFOLIO',
-                        title: 'Digital Experience &\nReal-Time Visualization',
-                        subtitle: 'For the Built Environment',
-                        paragraph1: 'Digital Experience & Real-Time Visualization Specialist',
-                      },
-                      state.project.settings.authorName,
-                    ),
+                    topLabel: 'SELF-INITIATED CONCEPT STUDY',
+                    title: 'Page Title',
+                    subtitle: 'A concise description of the project, capability or digital experience.',
+                    paragraph1: 'Use this area to explain the project, challenge or opportunity in a concise and clear way.',
+                    sectionTitle: 'PROJECT VALUE',
+                    paragraph2:
+                      'Explain how the work supports stakeholder understanding, digital strategy, technical review or client communication.',
+                    keyFocus: ['real-time visualization', 'interactive prototyping', 'digital experience', 'technical communication'],
+                    disclaimer: 'Self-initiated concept study using simulated or publicly available information.',
                   },
                   state.project.settings.authorName,
                 )
@@ -356,7 +259,19 @@ export const useBuilderStore = create<BuilderState>()(
         set((state) => {
           const index = state.project.pages.findIndex((page) => page.id === id)
           if (index < 0) return state
-          const duplicate = clonePage(state.project.pages[index], String(state.project.pages.length + 1).padStart(2, '0'))
+          const duplicateBase = clonePage(state.project.pages[index], String(state.project.pages.length + 1).padStart(2, '0'))
+          const duplicate =
+            state.project.templateId === 'wsp-digital-advisory'
+              ? syncWspDigitalPage(
+                  {
+                    ...duplicateBase,
+                    wspDigital: duplicateBase.wspDigital
+                      ? { ...duplicateBase.wspDigital, pageNumber: duplicateBase.pageNumber }
+                      : undefined,
+                  },
+                  state.project.settings.authorName,
+                )
+              : duplicateBase
           const pages = [...state.project.pages]
           pages.splice(index + 1, 0, duplicate)
           return { project: { ...state.project, pages }, activePageId: duplicate.id, hasUnsavedChanges: true }
@@ -396,7 +311,7 @@ export const useBuilderStore = create<BuilderState>()(
     }),
     {
       name: 'black-lab-portfolio-builder',
-      version: 9,
+      version: 12,
       storage: createJSONStorage(() => ({
         getItem: (name) => localStorage.getItem(name),
         setItem: (name, value) => {

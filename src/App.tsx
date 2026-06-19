@@ -17,12 +17,11 @@ import {
   Upload,
 } from 'lucide-react'
 import { getCanvasSize } from './canvas'
-import { createDefaultWspCoverContent, createDefaultWspProfileContent } from './defaults'
+import { createDefaultWspDigitalContent, getSixteenNineHeight } from './defaults'
 import { exportCurrentPng, exportPortfolioPdf } from './exportUtils'
 import { downloadText, normalizeProject, readImageForProject, sanitizeFilename } from './fileUtils'
 import { useBuilderStore } from './store'
-import { WspCoverPage } from './wspCover'
-import { WspProfilePage } from './wspProfile'
+import { WspDigitalAdvisoryPage } from './wspDigitalAdvisoryPage'
 import type {
   ExportQuality,
   FitMode,
@@ -30,11 +29,8 @@ import type {
   PortfolioPage,
   PortfolioProject,
   TemplateId,
-  WspCoverPageContent,
-  WspLayoutType,
-  WspProfileCard,
-  WspProfileComposition,
-  WspProfilePageContent,
+  WspDigitalAdvisoryPageContent,
+  WspDigitalFontSizes,
 } from './types'
 
 function Field({
@@ -202,69 +198,129 @@ function ImageDropzone({ onImage }: { onImage: (dataUrl: string) => void }) {
   )
 }
 
-function WspCoverControls({
+function WspDigitalAdvisoryControls({
   page,
-  authorName,
   onUpdate,
+  onSaveLayoutDefault,
 }: {
   page: PortfolioPage
-  authorName: string
   onUpdate: (patch: Partial<PortfolioPage>) => void
+  onSaveLayoutDefault: () => void
 }) {
-  const cover = page.wspCover ?? createDefaultWspCoverContent(page, authorName)
+  const content = createDefaultWspDigitalContent(page)
+  const heroHeight = getSixteenNineHeight(page.heroLayout.width)
 
-  const updateCover = (patch: Partial<WspCoverPageContent>) => {
-    const nextCover = { ...cover, ...patch }
+  const updateContent = (patch: Partial<WspDigitalAdvisoryPageContent>) => {
+    const nextContent = { ...content, ...patch }
     const nextImageSettings = {
-      fit: nextCover.imageFit,
-      x: nextCover.imagePositionX,
-      y: nextCover.imagePositionY,
-      zoom: nextCover.imageScale,
+      fit: nextContent.imageFit,
+      x: nextContent.imagePositionX,
+      y: nextContent.imagePositionY,
+      zoom: nextContent.imageScale,
     }
 
     onUpdate({
-      layoutType: 'cover',
-      topLabel: nextCover.eyebrow,
-      title: nextCover.title,
-      subtitle: nextCover.subtitle,
-      paragraph1: nextCover.professionalRole,
-      heroImage: nextCover.heroImage,
+      topLabel: nextContent.eyebrow,
+      title: nextContent.title,
+      subtitle: nextContent.subtitle,
+      pageNumber: nextContent.pageNumber,
+      caseStudyLabel: nextContent.pageCategory,
+      paragraph1: nextContent.primaryDescription,
+      sectionTitle: nextContent.secondarySectionTitle,
+      paragraph2: nextContent.secondaryDescription,
+      heroImage: nextContent.heroImage,
       imageSettings: nextImageSettings,
-      wspCover: nextCover,
+      keyFocus: [...nextContent.keyFocusItems],
+      disclaimer: nextContent.footerNote,
+      fontSettings: {
+        title: nextContent.fontSizes.title,
+        subtitle: nextContent.fontSizes.subtitle,
+        body: nextContent.fontSizes.body,
+        keyFocus: nextContent.fontSizes.keyFocusItem,
+      },
+      wspDigital: nextContent,
     })
+  }
+
+  const updateFocusItem = (index: number, value: string) => {
+    updateContent({ keyFocusItems: content.keyFocusItems.map((item, itemIndex) => (itemIndex === index ? value : item)) })
+  }
+
+  const moveFocusItem = (index: number, direction: -1 | 1) => {
+    const nextIndex = index + direction
+    if (nextIndex < 0 || nextIndex >= content.keyFocusItems.length) return
+    const keyFocusItems = [...content.keyFocusItems]
+    const [item] = keyFocusItems.splice(index, 1)
+    keyFocusItems.splice(nextIndex, 0, item)
+    updateContent({ keyFocusItems })
+  }
+
+  const removeFocusItem = (index: number) => {
+    if (content.keyFocusItems.length <= 3) return
+    updateContent({ keyFocusItems: content.keyFocusItems.filter((_, itemIndex) => itemIndex !== index) })
+  }
+
+  const addFocusItem = () => {
+    if (content.keyFocusItems.length >= 5) return
+    updateContent({ keyFocusItems: [...content.keyFocusItems, 'new focus'] })
+  }
+
+  const updateHeroWidth = (width: number) => {
+    onUpdate({ heroLayout: { ...page.heroLayout, width, height: getSixteenNineHeight(width) } })
+  }
+
+  const updateHeroHeight = (height: number) => {
+    const width = Math.round(height * 16 / 9)
+    onUpdate({ heroLayout: { ...page.heroLayout, width, height } })
+  }
+
+  const updateFontSize = (key: keyof WspDigitalFontSizes, value: number) => {
+    updateContent({ fontSizes: { ...content.fontSizes, [key]: value } })
   }
 
   return (
     <>
       <section className="panel">
-        <h2>Cover Content</h2>
-        <Field label="Eyebrow" value={cover.eyebrow} onChange={(eyebrow) => updateCover({ eyebrow })} />
-        <Field label="Title" value={cover.title} onChange={(title) => updateCover({ title })} multiline />
-        <Field label="Subtitle" value={cover.subtitle} onChange={(subtitle) => updateCover({ subtitle })} multiline />
+        <h2>Header</h2>
+        <Field label="Eyebrow" value={content.eyebrow} onChange={(eyebrow) => updateContent({ eyebrow })} />
+        <Field label="Title" value={content.title} onChange={(title) => updateContent({ title })} multiline />
+        <Field label="Subtitle" value={content.subtitle} onChange={(subtitle) => updateContent({ subtitle })} multiline />
+        <Field label="Page number" value={content.pageNumber} onChange={(pageNumber) => updateContent({ pageNumber })} />
+        <Field label="Page category" value={content.pageCategory} onChange={(pageCategory) => updateContent({ pageCategory })} />
+      </section>
+
+      <section className="panel">
+        <h2>Left Content</h2>
         <Field
-          label="Professional name"
-          value={cover.professionalName}
-          onChange={(professionalName) => updateCover({ professionalName })}
+          label="Primary description"
+          value={content.primaryDescription}
+          onChange={(primaryDescription) => updateContent({ primaryDescription })}
+          multiline
         />
         <Field
-          label="Professional role"
-          value={cover.professionalRole}
-          onChange={(professionalRole) => updateCover({ professionalRole })}
+          label="Secondary section title"
+          value={content.secondarySectionTitle}
+          onChange={(secondarySectionTitle) => updateContent({ secondarySectionTitle })}
+        />
+        <Field
+          label="Secondary description"
+          value={content.secondaryDescription}
+          onChange={(secondaryDescription) => updateContent({ secondaryDescription })}
           multiline
         />
       </section>
 
       <section className="panel">
         <h2>Hero Image</h2>
-        <ImageDropzone onImage={(heroImage) => updateCover({ heroImage })} />
-        {cover.heroImage && <img className="thumb" src={cover.heroImage} alt="" />}
+        <ImageDropzone onImage={(heroImage) => updateContent({ heroImage })} />
+        {content.heroImage && <img className="thumb" src={content.heroImage} alt="" />}
         <div className="action-grid">
-          <button onClick={() => updateCover({ heroImage: undefined })}>
+          <button onClick={() => updateContent({ heroImage: undefined })}>
             <Trash2 size={15} /> Remove image
           </button>
           <button
             onClick={() =>
-              updateCover({
+              updateContent({
                 imagePositionX: 0,
                 imagePositionY: 0,
                 imageScale: 1,
@@ -276,302 +332,241 @@ function WspCoverControls({
         </div>
         <SelectField<FitMode>
           label="Fit"
-          value={cover.imageFit}
+          value={content.imageFit}
           options={['cover', 'contain']}
           labels={{ cover: 'Cover', contain: 'Contain' }}
-          onChange={(imageFit) => updateCover({ imageFit })}
+          onChange={(imageFit) => updateContent({ imageFit })}
         />
         <NumberSlider
           label="Position X"
-          value={cover.imagePositionX}
+          value={content.imagePositionX}
           min={-240}
           max={240}
-          onChange={(imagePositionX) => updateCover({ imagePositionX })}
+          onChange={(imagePositionX) => updateContent({ imagePositionX })}
           suffix="px"
         />
         <NumberSlider
           label="Position Y"
-          value={cover.imagePositionY}
+          value={content.imagePositionY}
           min={-240}
           max={240}
-          onChange={(imagePositionY) => updateCover({ imagePositionY })}
+          onChange={(imagePositionY) => updateContent({ imagePositionY })}
           suffix="px"
         />
         <NumberSlider
           label="Scale"
-          value={cover.imageScale}
+          value={content.imageScale}
           min={0.5}
           max={2.5}
           step={0.05}
-          onChange={(imageScale) => updateCover({ imageScale })}
+          onChange={(imageScale) => updateContent({ imageScale })}
         />
       </section>
 
       <section className="panel">
-        <h2>Appearance</h2>
+        <h2>Layout</h2>
         <NumberSlider
-          label="Overlay opacity"
-          value={cover.overlayOpacity}
-          min={0}
-          max={0.85}
-          step={0.05}
-          onChange={(overlayOpacity) => updateCover({ overlayOpacity })}
+          label="Hero width"
+          value={page.heroLayout.width}
+          min={460}
+          max={1156}
+          onChange={updateHeroWidth}
+          suffix="px"
         />
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={cover.showTopAccent}
-            onChange={(event) => updateCover({ showTopAccent: event.target.checked })}
-          />
-          Show top accent
-        </label>
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={cover.showImageAccent}
-            onChange={(event) => updateCover({ showImageAccent: event.target.checked })}
-          />
-          Show image accent
-        </label>
+        <NumberSlider
+          label="Hero height"
+          value={heroHeight}
+          min={259}
+          max={650}
+          onChange={updateHeroHeight}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Hero X"
+          value={page.heroLayout.x}
+          min={220}
+          max={1240}
+          onChange={(x) => onUpdate({ heroLayout: { ...page.heroLayout, x, height: heroHeight } })}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Hero Y"
+          value={page.heroLayout.y}
+          min={80}
+          max={520}
+          onChange={(y) => onUpdate({ heroLayout: { ...page.heroLayout, y, height: heroHeight } })}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Text X"
+          value={page.textLayout.x}
+          min={0}
+          max={760}
+          onChange={(x) => onUpdate({ textLayout: { ...page.textLayout, x } })}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Text Y"
+          value={page.textLayout.y}
+          min={80}
+          max={330}
+          onChange={(y) => onUpdate({ textLayout: { ...page.textLayout, y } })}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Text width"
+          value={page.textLayout.width}
+          min={260}
+          max={900}
+          onChange={(width) => onUpdate({ textLayout: { ...page.textLayout, width } })}
+          suffix="px"
+        />
+        <button className="wide-button" onClick={onSaveLayoutDefault}>
+          <Save size={15} /> Save layout default
+        </button>
       </section>
 
-    </>
-  )
-}
-
-function CapabilityCardEditor({
-  card,
-  index,
-  canMoveUp,
-  canMoveDown,
-  onUpdate,
-  onMove,
-  onRemove,
-}: {
-  card: WspProfileCard
-  index: number
-  canMoveUp: boolean
-  canMoveDown: boolean
-  onUpdate: (patch: Partial<WspProfileCard>) => void
-  onMove: (direction: -1 | 1) => void
-  onRemove: () => void
-}) {
-  return (
-    <div className="card-editor">
-      <div className="card-editor-title">
-        <strong>Card {index + 1}</strong>
-        <div>
-          <button className="icon-button" title="Move up" disabled={!canMoveUp} onClick={() => onMove(-1)}>
-            <ArrowUp size={15} />
-          </button>
-          <button className="icon-button" title="Move down" disabled={!canMoveDown} onClick={() => onMove(1)}>
-            <ArrowDown size={15} />
-          </button>
-          <button className="icon-button" title="Remove" onClick={onRemove}>
-            <Trash2 size={15} />
-          </button>
-        </div>
-      </div>
-      <Field label="Icon / short label" value={card.icon ?? ''} onChange={(icon) => onUpdate({ icon })} />
-      <Field label="Title" value={card.title} onChange={(title) => onUpdate({ title })} />
-      <Field label="Description" value={card.description} onChange={(description) => onUpdate({ description })} multiline />
-    </div>
-  )
-}
-
-function WspProfileControls({
-  page,
-  onUpdate,
-}: {
-  page: PortfolioPage
-  onUpdate: (patch: Partial<PortfolioPage>) => void
-}) {
-  const profile = createDefaultWspProfileContent(page)
-
-  const updateProfile = (patch: Partial<WspProfilePageContent>) => {
-    const nextProfile = { ...profile, ...patch }
-    const nextImageSettings = {
-      fit: nextProfile.imageFit,
-      x: nextProfile.imagePositionX,
-      y: nextProfile.imagePositionY,
-      zoom: nextProfile.imageScale,
-    }
-
-    onUpdate({
-      layoutType: 'profile',
-      topLabel: nextProfile.eyebrow,
-      title: nextProfile.title,
-      subtitle: nextProfile.introduction,
-      paragraph1: nextProfile.footerLabel,
-      pageNumber: nextProfile.pageNumber,
-      heroImage: nextProfile.sideImage,
-      imageSettings: nextImageSettings,
-      wspProfile: nextProfile,
-    })
-  }
-
-  const updateCard = (id: string, patch: Partial<WspProfileCard>) => {
-    updateProfile({
-      cards: profile.cards.map((card) => (card.id === id ? { ...card, ...patch } : card)),
-    })
-  }
-
-  const moveCard = (index: number, direction: -1 | 1) => {
-    const nextIndex = index + direction
-    if (nextIndex < 0 || nextIndex >= profile.cards.length) return
-    const cards = [...profile.cards]
-    const [card] = cards.splice(index, 1)
-    cards.splice(nextIndex, 0, card)
-    updateProfile({ cards })
-  }
-
-  const removeCard = (id: string) => {
-    updateProfile({ cards: profile.cards.filter((card) => card.id !== id) })
-  }
-
-  const addCard = () => {
-    if (profile.cards.length >= 4) return
-    updateProfile({
-      cards: [
-        ...profile.cards,
-        {
-          id: crypto.randomUUID(),
-          icon: String(profile.cards.length + 1).padStart(2, '0'),
-          title: 'New Capability',
-          description: 'Describe this capability in one concise sentence.',
-        },
-      ],
-    })
-  }
-
-  return (
-    <>
       <section className="panel">
-        <h2>Profile Content</h2>
-        <SelectField<WspProfileComposition>
-          label="Profile Composition"
-          value={profile.composition}
-          options={['horizontal', 'grid']}
-          labels={{ horizontal: 'Image + 4 Cards Horizontal', grid: 'Image + 4 Cards Grid' }}
-          onChange={(composition) => updateProfile({ composition })}
+        <h2>Type</h2>
+        <NumberSlider
+          label="Eyebrow size"
+          value={content.fontSizes.eyebrow}
+          min={8}
+          max={28}
+          onChange={(eyebrow) => updateFontSize('eyebrow', eyebrow)}
+          suffix="px"
         />
-        <Field label="Eyebrow" value={profile.eyebrow} onChange={(eyebrow) => updateProfile({ eyebrow })} />
-        <Field label="Title" value={profile.title} onChange={(title) => updateProfile({ title })} multiline />
-        <Field label="Introduction" value={profile.introduction} onChange={(introduction) => updateProfile({ introduction })} multiline />
-        <Field label="Footer label" value={profile.footerLabel} onChange={(footerLabel) => updateProfile({ footerLabel })} multiline />
-        <Field label="Page number" value={profile.pageNumber} onChange={(pageNumber) => updateProfile({ pageNumber })} />
+        <NumberSlider
+          label="Title size"
+          value={content.fontSizes.title}
+          min={18}
+          max={86}
+          onChange={(title) => updateFontSize('title', title)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Subtitle size"
+          value={content.fontSizes.subtitle}
+          min={10}
+          max={38}
+          onChange={(subtitle) => updateFontSize('subtitle', subtitle)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Body size"
+          value={content.fontSizes.body}
+          min={10}
+          max={34}
+          onChange={(body) => updateFontSize('body', body)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Section title size"
+          value={content.fontSizes.sectionTitle}
+          min={10}
+          max={38}
+          onChange={(sectionTitle) => updateFontSize('sectionTitle', sectionTitle)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Page number size"
+          value={content.fontSizes.pageNumber}
+          min={18}
+          max={58}
+          onChange={(pageNumber) => updateFontSize('pageNumber', pageNumber)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Page category size"
+          value={content.fontSizes.pageCategory}
+          min={8}
+          max={32}
+          onChange={(pageCategory) => updateFontSize('pageCategory', pageCategory)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Focus label size"
+          value={content.fontSizes.keyFocusLabel}
+          min={10}
+          max={34}
+          onChange={(keyFocusLabel) => updateFontSize('keyFocusLabel', keyFocusLabel)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Focus item size"
+          value={content.fontSizes.keyFocusItem}
+          min={8}
+          max={30}
+          onChange={(keyFocusItem) => updateFontSize('keyFocusItem', keyFocusItem)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Footer note size"
+          value={content.fontSizes.footerNote}
+          min={8}
+          max={24}
+          onChange={(footerNote) => updateFontSize('footerNote', footerNote)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Footer name size"
+          value={content.fontSizes.footerName}
+          min={8}
+          max={28}
+          onChange={(footerName) => updateFontSize('footerName', footerName)}
+          suffix="px"
+        />
+        <NumberSlider
+          label="Footer role size"
+          value={content.fontSizes.footerRole}
+          min={8}
+          max={24}
+          onChange={(footerRole) => updateFontSize('footerRole', footerRole)}
+          suffix="px"
+        />
       </section>
 
       <section className="panel">
         <div className="panel-title-row">
-          <h2>Cards</h2>
-          <button className="icon-button" title="Add card" disabled={profile.cards.length >= 4} onClick={addCard}>
+          <h2>Key Focus</h2>
+          <button className="icon-button" title="Add focus" disabled={content.keyFocusItems.length >= 5} onClick={addFocusItem}>
             <Plus size={16} />
           </button>
         </div>
+        <Field label="Label" value={content.keyFocusLabel} onChange={(keyFocusLabel) => updateContent({ keyFocusLabel })} />
         <div className="card-editor-list">
-          {profile.cards.map((card, index) => (
-            <CapabilityCardEditor
-              key={card.id}
-              card={card}
-              index={index}
-              canMoveUp={index > 0}
-              canMoveDown={index < profile.cards.length - 1}
-              onUpdate={(patch) => updateCard(card.id, patch)}
-              onMove={(direction) => moveCard(index, direction)}
-              onRemove={() => removeCard(card.id)}
-            />
+          {content.keyFocusItems.map((item, index) => (
+            <div className="card-editor" key={`${item}-${index}`}>
+              <div className="card-editor-title">
+                <strong>Item {index + 1}</strong>
+                <div>
+                  <button className="icon-button" title="Move left" disabled={index === 0} onClick={() => moveFocusItem(index, -1)}>
+                    <ArrowUp size={15} />
+                  </button>
+                  <button
+                    className="icon-button"
+                    title="Move right"
+                    disabled={index === content.keyFocusItems.length - 1}
+                    onClick={() => moveFocusItem(index, 1)}
+                  >
+                    <ArrowDown size={15} />
+                  </button>
+                  <button className="icon-button" title="Remove" disabled={content.keyFocusItems.length <= 3} onClick={() => removeFocusItem(index)}>
+                    <Trash2 size={15} />
+                  </button>
+                </div>
+              </div>
+              <Field label="Text" value={item} onChange={(value) => updateFocusItem(index, value)} />
+            </div>
           ))}
         </div>
       </section>
 
       <section className="panel">
-        <h2>Side Image</h2>
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={profile.showSideImage}
-            onChange={(event) => updateProfile({ showSideImage: event.target.checked })}
-          />
-          Show side image
-        </label>
-        <ImageDropzone onImage={(sideImage) => updateProfile({ sideImage, showSideImage: true })} />
-        {profile.sideImage && <img className="thumb" src={profile.sideImage} alt="" />}
-        <div className="action-grid">
-          <button onClick={() => updateProfile({ sideImage: undefined })}>
-            <Trash2 size={15} /> Remove image
-          </button>
-          <button
-            onClick={() =>
-              updateProfile({
-                imagePositionX: 0,
-                imagePositionY: 0,
-                imageScale: 1,
-              })
-            }
-          >
-            <Target size={15} /> Reset image
-          </button>
-        </div>
-        <SelectField<FitMode>
-          label="Fit"
-          value={profile.imageFit}
-          options={['cover', 'contain']}
-          labels={{ cover: 'Cover', contain: 'Contain' }}
-          onChange={(imageFit) => updateProfile({ imageFit })}
-        />
-        <NumberSlider
-          label="Position X"
-          value={profile.imagePositionX}
-          min={-240}
-          max={240}
-          onChange={(imagePositionX) => updateProfile({ imagePositionX })}
-          suffix="px"
-        />
-        <NumberSlider
-          label="Position Y"
-          value={profile.imagePositionY}
-          min={-240}
-          max={240}
-          onChange={(imagePositionY) => updateProfile({ imagePositionY })}
-          suffix="px"
-        />
-        <NumberSlider
-          label="Scale"
-          value={profile.imageScale}
-          min={0.5}
-          max={2.5}
-          step={0.05}
-          onChange={(imageScale) => updateProfile({ imageScale })}
-        />
-      </section>
-
-      <section className="panel">
-        <h2>Appearance</h2>
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={profile.showTopAccent}
-            onChange={(event) => updateProfile({ showTopAccent: event.target.checked })}
-          />
-          Show top accent
-        </label>
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={profile.showImageAccent}
-            onChange={(event) => updateProfile({ showImageAccent: event.target.checked })}
-          />
-          Show image accent
-        </label>
-        <label className="toggle-row">
-          <input
-            type="checkbox"
-            checked={profile.showFooter}
-            onChange={(event) => updateProfile({ showFooter: event.target.checked })}
-          />
-          Show footer
-        </label>
+        <h2>Footer</h2>
+        <Field label="Footer note" value={content.footerNote} onChange={(footerNote) => updateContent({ footerNote })} multiline />
+        <Field label="Footer name" value={content.footerName} onChange={(footerName) => updateContent({ footerName })} />
+        <Field label="Footer role" value={content.footerRole} onChange={(footerRole) => updateContent({ footerRole })} />
       </section>
     </>
   )
@@ -642,21 +637,6 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
     if (templateId === project.templateId) return
     if (hasUnsavedChanges && !window.confirm('Current project has unsaved changes. Switch templates anyway?')) return
     setTemplate(templateId)
-  }
-
-  const selectWspLayout = (layoutType: WspLayoutType) => {
-    if (activePage.layoutType === layoutType) return
-    if (layoutType === 'profile') {
-      updateActivePage({
-        layoutType,
-        wspProfile: activePage.wspProfile ?? createDefaultWspProfileContent(activePage),
-      })
-      return
-    }
-    updateActivePage({
-      layoutType,
-      wspCover: activePage.wspCover ?? createDefaultWspCoverContent(activePage, project.settings.authorName),
-    })
   }
 
   return (
@@ -777,23 +757,11 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
       )}
 
       {isWspProject ? (
-        <>
-          <section className="panel">
-            <h2>Page Layout</h2>
-            <SelectField<WspLayoutType>
-              label="Layout"
-              value={activePage.layoutType ?? 'cover'}
-              options={['cover', 'profile']}
-              labels={{ cover: 'Cover', profile: 'Profile / Capabilities' }}
-              onChange={selectWspLayout}
-            />
-          </section>
-          {(activePage.layoutType ?? 'cover') === 'profile' ? (
-            <WspProfileControls page={activePage} onUpdate={updateActivePage} />
-          ) : (
-            <WspCoverControls page={activePage} authorName={project.settings.authorName} onUpdate={updateActivePage} />
-          )}
-        </>
+        <WspDigitalAdvisoryControls
+          page={activePage}
+          onUpdate={updateActivePage}
+          onSaveLayoutDefault={saveActiveLayoutAsDefault}
+        />
       ) : (
         <>
           <section className="panel">
@@ -1142,13 +1110,12 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
       const [file] = files
       if (!file) return
       const image = await readImageForProject(file)
-      if (project.templateId === 'wsp-digital-advisory' && (activePage.layoutType ?? 'cover') === 'profile') {
+      if (project.templateId === 'wsp-digital-advisory') {
         updateActivePage({
           heroImage: image,
-          wspProfile: {
-            ...(activePage.wspProfile ?? createDefaultWspProfileContent(activePage)),
-            sideImage: image,
-            showSideImage: true,
+          wspDigital: {
+            ...createDefaultWspDigitalContent(activePage),
+            heroImage: image,
           },
         })
         return
@@ -1207,11 +1174,7 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
                 <CaseStudyStandard page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
               )}
               {project.templateId === 'wsp-digital-advisory' && (
-                (activePage.layoutType ?? 'cover') === 'profile' ? (
-                  <WspProfilePage page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
-                ) : (
-                  <WspCoverPage page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
-                )
+                <WspDigitalAdvisoryPage page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
               )}
             </div>
           </div>

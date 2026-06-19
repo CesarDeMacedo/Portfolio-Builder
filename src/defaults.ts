@@ -9,6 +9,8 @@ import type {
   TextLayout,
   ThemeSettings,
   WspCoverPageContent,
+  WspDigitalAdvisoryPageContent,
+  WspDigitalFontSizes,
   WspProfileComposition,
   WspProfileImageAlignment,
   WspProfilePageContent,
@@ -48,6 +50,44 @@ export const defaultTextLayout: TextLayout = {
   x: 74,
   y: 150,
   width: 695,
+}
+
+export function getSixteenNineHeight(width: number) {
+  return Math.round(width * 9 / 16)
+}
+
+export function createDefaultWspDigitalFontSizes(fontSettings?: Partial<FontSettings>): WspDigitalFontSizes {
+  return {
+    eyebrow: WSP_TEMPLATE_TOKENS.type.eyebrow,
+    title: fontSettings?.title ?? WSP_TEMPLATE_TOKENS.type.title,
+    subtitle: fontSettings?.subtitle ?? WSP_TEMPLATE_TOKENS.type.subtitle,
+    body: fontSettings?.body ?? WSP_TEMPLATE_TOKENS.type.body,
+    sectionTitle: WSP_TEMPLATE_TOKENS.type.sectionTitle,
+    pageNumber: WSP_TEMPLATE_TOKENS.type.pageNumber,
+    pageCategory: WSP_TEMPLATE_TOKENS.type.pageCategory,
+    keyFocusLabel: WSP_TEMPLATE_TOKENS.type.keyFocusLabel,
+    keyFocusItem: fontSettings?.keyFocus ?? WSP_TEMPLATE_TOKENS.type.keyFocusItem,
+    footerNote: WSP_TEMPLATE_TOKENS.type.footer,
+    footerName: WSP_TEMPLATE_TOKENS.type.footerName,
+    footerRole: WSP_TEMPLATE_TOKENS.type.footerRole,
+  }
+}
+
+function normalizeWspDigitalFontSizes(
+  fontSizes?: Partial<WspDigitalFontSizes>,
+  fontSettings?: Partial<FontSettings>,
+): WspDigitalFontSizes {
+  return {
+    ...createDefaultWspDigitalFontSizes(fontSettings),
+    ...fontSizes,
+  }
+}
+
+function normalizeHeroLayout(layout: HeroLayout): HeroLayout {
+  return {
+    ...layout,
+    height: getSixteenNineHeight(layout.width),
+  }
 }
 
 export function createLayoutPreset(page: PortfolioPage): PageLayoutPreset {
@@ -182,46 +222,98 @@ export function createDefaultWspProfileContent(page?: Partial<PortfolioPage>): W
   }
 }
 
-function normalizeWspCoverPage(page: PortfolioPage, professionalName?: string): PortfolioPage {
-  const wspCover = createDefaultWspCoverContent(page, professionalName)
+function normalizeWspKeyFocus(items?: string[]) {
+  const defaults = ['real-time visualization', 'interactive prototyping', 'digital experience', 'technical communication']
+  const nextItems = (items?.length ? items : defaults).map((item) => item.trim()).filter(Boolean).slice(0, 5)
+
+  return [...nextItems, ...defaults].slice(0, Math.max(3, nextItems.length))
+}
+
+function cleanPageCategory(value?: string) {
+  const category = value?.replace('/', '').trim()
+  return category || 'CASE STUDY'
+}
+
+export function createDefaultWspDigitalContent(
+  page?: Partial<PortfolioPage>,
+  footerName = 'Cesar De Macedo',
+): WspDigitalAdvisoryPageContent {
+  const imageSettings = { ...defaultImageSettings, ...page?.imageSettings }
+  const cover = page?.wspCover
+  const profile = page?.wspProfile
+  const existing = page?.wspDigital
+  const fontSizes = normalizeWspDigitalFontSizes(existing?.fontSizes, page?.fontSettings)
 
   return {
-    ...page,
-    layoutType: 'cover',
-    topLabel: wspCover.eyebrow,
-    title: wspCover.title,
-    subtitle: wspCover.subtitle,
-    paragraph1: wspCover.professionalRole,
-    heroImage: wspCover.heroImage,
-    imageSettings: {
-      fit: wspCover.imageFit,
-      x: wspCover.imagePositionX,
-      y: wspCover.imagePositionY,
-      zoom: wspCover.imageScale,
-    },
-    wspCover,
+    eyebrow: existing?.eyebrow ?? cover?.eyebrow ?? profile?.eyebrow ?? page?.topLabel ?? 'SELF-INITIATED CONCEPT STUDY',
+    title: existing?.title ?? cover?.title ?? profile?.title ?? page?.title ?? 'Page Title',
+    subtitle:
+      existing?.subtitle ??
+      cover?.subtitle ??
+      profile?.introduction ??
+      page?.subtitle ??
+      'A concise description of the project, capability or digital experience.',
+    pageNumber: existing?.pageNumber ?? profile?.pageNumber ?? page?.pageNumber ?? '01',
+    pageCategory: existing?.pageCategory ?? cleanPageCategory(page?.caseStudyLabel),
+    primaryDescription:
+      existing?.primaryDescription ??
+      page?.paragraph1 ??
+      'Use this area to explain the project, challenge or opportunity in a concise and clear way.',
+    secondarySectionTitle: existing?.secondarySectionTitle ?? page?.sectionTitle ?? 'PROJECT VALUE',
+    secondaryDescription:
+      existing?.secondaryDescription ??
+      page?.paragraph2 ??
+      'Explain how the work supports stakeholder understanding, digital strategy, technical review or client communication.',
+    heroImage: existing?.heroImage ?? cover?.heroImage ?? profile?.sideImage ?? page?.heroImage,
+    imageFit: existing?.imageFit ?? cover?.imageFit ?? profile?.imageFit ?? imageSettings.fit,
+    imagePositionX: existing?.imagePositionX ?? cover?.imagePositionX ?? profile?.imagePositionX ?? imageSettings.x,
+    imagePositionY: existing?.imagePositionY ?? cover?.imagePositionY ?? profile?.imagePositionY ?? imageSettings.y,
+    imageScale: existing?.imageScale ?? cover?.imageScale ?? profile?.imageScale ?? imageSettings.zoom,
+    keyFocusLabel: existing?.keyFocusLabel ?? 'KEY FOCUS',
+    keyFocusItems: normalizeWspKeyFocus(existing?.keyFocusItems ?? page?.keyFocus),
+    footerNote:
+      existing?.footerNote ??
+      (profile?.footerLabel && !profile.footerLabel.includes('Cesar De Macedo') ? profile.footerLabel : undefined) ??
+      page?.disclaimer ??
+      'Self-initiated concept study using simulated or publicly available information.',
+    footerName: existing?.footerName ?? cover?.professionalName ?? footerName,
+    footerRole: existing?.footerRole ?? cover?.professionalRole ?? 'Digital Experience & Real-Time Visualization Specialist',
+    fontSizes,
   }
 }
 
-function normalizeWspProfilePage(page: PortfolioPage): PortfolioPage {
-  const wspProfile = createDefaultWspProfileContent(page)
+function normalizeWspDigitalPage(page: PortfolioPage, footerName?: string): PortfolioPage {
+  const wspDigital = createDefaultWspDigitalContent(page, footerName)
+  const heroLayout = normalizeHeroLayout({ ...defaultHeroLayout, ...page.heroLayout })
 
   return {
     ...page,
-    layoutType: 'profile',
-    topLabel: wspProfile.eyebrow,
-    title: wspProfile.title,
-    subtitle: wspProfile.introduction,
-    paragraph1: wspProfile.footerLabel,
-    pageNumber: wspProfile.pageNumber,
-    heroImage: wspProfile.sideImage,
+    layoutType: undefined,
+    topLabel: wspDigital.eyebrow,
+    title: wspDigital.title,
+    subtitle: wspDigital.subtitle,
+    pageNumber: wspDigital.pageNumber,
+    caseStudyLabel: wspDigital.pageCategory,
+    paragraph1: wspDigital.primaryDescription,
+    sectionTitle: wspDigital.secondarySectionTitle,
+    paragraph2: wspDigital.secondaryDescription,
+    keyFocus: [...wspDigital.keyFocusItems],
+    disclaimer: wspDigital.footerNote,
+    heroImage: wspDigital.heroImage,
     imageSettings: {
-      fit: wspProfile.imageFit,
-      x: wspProfile.imagePositionX,
-      y: wspProfile.imagePositionY,
-      zoom: wspProfile.imageScale,
+      fit: wspDigital.imageFit,
+      x: wspDigital.imagePositionX,
+      y: wspDigital.imagePositionY,
+      zoom: wspDigital.imageScale,
     },
-    wspProfile,
+    heroLayout,
+    fontSettings: {
+      title: wspDigital.fontSizes.title,
+      subtitle: wspDigital.fontSizes.subtitle,
+      body: wspDigital.fontSizes.body,
+      keyFocus: wspDigital.fontSizes.keyFocusItem,
+    },
+    wspDigital,
   }
 }
 
@@ -235,29 +327,29 @@ export function normalizeProject(project: PortfolioProject | (Partial<PortfolioP
   const settings = { ...fallback.settings, ...project.settings }
   const pages =
     Array.isArray(project.pages) && project.pages.length > 0
-      ? project.pages.map(normalizePage).map((page) =>
-          templateId === 'wsp-digital-advisory'
-            ? page.layoutType === 'profile'
-              ? normalizeWspProfilePage(page)
-              : normalizeWspCoverPage(page, settings.authorName)
-            : page,
-        )
+      ? project.pages
+          .map(normalizePage)
+          .map((page) => (templateId === 'wsp-digital-advisory' ? normalizeWspDigitalPage(page, settings.authorName) : page))
       : fallback.pages
+  const defaultPageLayout = project.defaultPageLayout
+    ? {
+        imageSettings: { ...defaultImageSettings, ...project.defaultPageLayout.imageSettings },
+        heroLayout:
+          templateId === 'wsp-digital-advisory'
+            ? normalizeHeroLayout({ ...defaultHeroLayout, ...project.defaultPageLayout.heroLayout })
+            : { ...defaultHeroLayout, ...project.defaultPageLayout.heroLayout },
+        textLayout: { ...defaultTextLayout, ...project.defaultPageLayout.textLayout },
+        fontSettings: { ...defaultFonts, ...project.defaultPageLayout.fontSettings },
+        theme: { ...defaultTheme, ...project.defaultPageLayout.theme },
+      }
+    : undefined
 
   return {
     version: 1,
     templateId,
     settings,
     pages,
-    defaultPageLayout: project.defaultPageLayout
-      ? {
-          imageSettings: { ...defaultImageSettings, ...project.defaultPageLayout.imageSettings },
-          heroLayout: { ...defaultHeroLayout, ...project.defaultPageLayout.heroLayout },
-          textLayout: { ...defaultTextLayout, ...project.defaultPageLayout.textLayout },
-          fontSettings: { ...defaultFonts, ...project.defaultPageLayout.fontSettings },
-          theme: { ...defaultTheme, ...project.defaultPageLayout.theme },
-        }
-      : undefined,
+    defaultPageLayout,
   }
 }
 

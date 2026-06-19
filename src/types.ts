@@ -110,6 +110,43 @@ export type WspProfilePageContent = {
   showFooter: boolean
 }
 
+export type WspDigitalAdvisoryPageContent = {
+  eyebrow: string
+  title: string
+  subtitle: string
+  pageNumber: string
+  pageCategory: string
+  primaryDescription: string
+  secondarySectionTitle: string
+  secondaryDescription: string
+  heroImage?: string
+  imageFit: FitMode
+  imagePositionX: number
+  imagePositionY: number
+  imageScale: number
+  keyFocusLabel: string
+  keyFocusItems: string[]
+  footerNote: string
+  footerName: string
+  footerRole: string
+  fontSizes: WspDigitalFontSizes
+}
+
+export type WspDigitalFontSizes = {
+  eyebrow: number
+  title: number
+  subtitle: number
+  body: number
+  sectionTitle: number
+  pageNumber: number
+  pageCategory: number
+  keyFocusLabel: number
+  keyFocusItem: number
+  footerNote: number
+  footerName: number
+  footerRole: number
+}
+
 export type PortfolioPage = {
   id: string
   name: string
@@ -133,6 +170,7 @@ export type PortfolioPage = {
   layoutType?: WspLayoutType
   wspCover?: WspCoverPageContent
   wspProfile?: WspProfilePageContent
+  wspDigital?: WspDigitalAdvisoryPageContent
 }
 
 export type ProjectSettings = {
