@@ -17,6 +17,14 @@ export function WspDigitalAdvisoryPage({
   const content = createDefaultWspDigitalContent(page)
   const tokens = WSP_TEMPLATE_TOKENS.nuclear
   const type = content.fontSizes
+  const emailMatch = content.footerNote.match(/([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/)
+  const disclaimerParts = emailMatch
+    ? [
+        content.footerNote.slice(0, emailMatch.index ?? 0),
+        emailMatch[0],
+        content.footerNote.slice((emailMatch.index ?? 0) + emailMatch[0].length),
+      ]
+    : [content.footerNote]
   const heroWidth = page.heroLayout?.width ?? tokens.hero.width
   const hero = {
     x: page.heroLayout?.x ?? tokens.hero.x,
@@ -131,12 +139,24 @@ export function WspDigitalAdvisoryPage({
         <div className="wsp-digital-footer-row">
           <p className="wsp-digital-disclaimer overflow-check" style={{ fontSize: type.footerNote }}>
             <Info size={17} />
-            {content.footerNote}
+            {disclaimerParts[0]}
+            {disclaimerParts[1] ? (
+              <span className="wsp-digital-email-link" data-pdf-link="email">
+                {disclaimerParts[1]}
+              </span>
+            ) : null}
+            {disclaimerParts[2]}
           </p>
           <p className="wsp-digital-signature overflow-check">
             <strong style={{ color: page.theme.primaryColor, fontSize: type.footerName }}>{content.footerName}</strong>
             <i style={{ background: page.theme.accentColor }} />
-            <span style={{ fontSize: type.footerRole }}>{content.footerRole}</span>
+            <span
+              className="wsp-digital-link-target"
+              data-pdf-link="linkedin"
+              style={{ fontSize: type.footerRole }}
+            >
+              {content.footerRole}
+            </span>
           </p>
         </div>
       </footer>

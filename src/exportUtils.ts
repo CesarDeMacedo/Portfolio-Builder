@@ -110,10 +110,73 @@ async function buildPortfolioPdf(options: PdfCaptureOptions, captureQuality: Exp
       await waitForPaint()
       const element = getCanvasElement()
       if (!element) throw new Error('Preview canvas was not found')
+      // Prepare link annotation coordinates for Page 10 (email and LinkedIn)
+      const annotations: { x: number; y: number; w: number; h: number; url: string }[] = []
+      try {
+        const pageObj = project.pages.find((p) => p.id === pageIds[index])
+        if (pageObj && pageObj.pageNumber === '10') {
+          // locate the rendered footer elements inside the preview element
+          const canvasElement = (element.classList && element.classList.contains('portfolio-canvas')
+            ? element
+            : (element.querySelector && element.querySelector('.portfolio-canvas')) ?? element) as HTMLElement
+          const emailLinkEl = canvasElement.querySelector('.wsp-digital-email-link') as HTMLElement | null
+          const linkedinLinkEl = canvasElement.querySelector('.wsp-digital-link-target') as HTMLElement | null
+
+          const cRect = canvasElement.getBoundingClientRect()
+          const previewScaleX = cRect.width / Math.max(1, canvasElement.offsetWidth)
+          const previewScaleY = cRect.height / Math.max(1, canvasElement.offsetHeight)
+
+          const normalizeRect = (rect: DOMRect) => ({
+            x: (rect.left - cRect.left) / previewScaleX,
+            y: (rect.top - cRect.top) / previewScaleY,
+            width: rect.width / previewScaleX,
+            height: rect.height / previewScaleY,
+          })
+
+          if (emailLinkEl) {
+            const rect = emailLinkEl.getBoundingClientRect()
+            const normalized = normalizeRect(rect)
+            annotations.push({
+              x: Math.round(normalized.x),
+              y: Math.round(normalized.y),
+              w: Math.round(normalized.width),
+              h: Math.round(normalized.height),
+              url: 'mailto:cesardemacedo@gmail.com',
+            })
+          }
+
+          if (linkedinLinkEl) {
+            const rect = linkedinLinkEl.getBoundingClientRect()
+            const normalized = normalizeRect(rect)
+            annotations.push({
+              x: Math.round(normalized.x),
+              y: Math.round(normalized.y),
+              w: Math.round(normalized.width),
+              h: Math.round(normalized.height),
+              url: 'https://www.linkedin.com/in/cesar-de-macedo-3b4a5a51',
+            })
+          }
+        }
+      } catch {
+        // non-fatal: continue without annotations
+      }
       const canvas = await captureElement(element, captureQuality)
       const image = canvas.toDataURL('image/jpeg', jpegQuality)
       if (index > 0) pdf.addPage([size.width, size.height], size.width >= size.height ? 'landscape' : 'portrait')
       pdf.addImage(image, 'JPEG', 0, 0, size.width, size.height, undefined, 'FAST')
+      // add link annotations (if any) on this page
+      try {
+        if (annotations.length) {
+          for (const a of annotations) {
+            // jsPDF link coordinates use PDF user units (px here) with origin at top-left
+            // add a transparent link over the rendered text area
+            // @ts-expect-error - jsPDF link typing may vary
+            pdf.link(a.x, a.y, a.w, a.h, { url: a.url })
+          }
+        }
+      } catch {
+        // ignore annotation failures
+      }
     }
   } finally {
     setActivePage(restoreActivePage)
@@ -141,6 +204,13 @@ export async function exportPortfolioPdf(options: PdfCaptureOptions) {
 
   if (quality === 'linkedin' && bestBytes > LINKEDIN_MAX_BYTES) {
     console.warn(`LinkedIn PDF is ${(bestBytes / 1024 / 1024).toFixed(1)} MB, above the 20 MB target.`)
+  }
+
+  // Expose the generated PDF data URL for automated inspection (non-persistent)
+  try {
+    ;(window as unknown as { __lastExportedPdfDataUrl?: string }).__lastExportedPdfDataUrl = bestPdf.output('datauristring')
+  } catch {
+    // ignore
   }
 
   const suffix = quality === 'linkedin' ? 'LinkedIn' : undefined
