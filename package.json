@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "import:stantec": "node scripts/import-stantec-backup.mjs",
+    "verify:stantec": "node scripts/verify-stantec-default.mjs"
   },
   "dependencies": {
     "dom-to-image-more": "^3.9.0",
