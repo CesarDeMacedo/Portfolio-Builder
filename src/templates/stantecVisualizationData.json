@@ -1,0 +1,924 @@
+{
+  "version": 1,
+  "templateId": "stantec-visualization",
+  "settings": {
+    "projectName": "Stantec Visualization Portfolio",
+    "portfolioTitle": "Stantec – Visualization Artist Portfolio",
+    "authorName": "Cesar De Macedo",
+    "pageSize": "16:9",
+    "exportQuality": "linkedin"
+  },
+  "pages": [
+    {
+      "name": "INTRODUCTION",
+      "pageNumber": "01",
+      "template": "case-study-standard",
+      "caseStudyLabel": "INTRODUCTION",
+      "topLabel": "VISUALIZATION · INFRASTRUCTURE · IMMERSIVE EXPERIENCE",
+      "title": "VISUALIZATION FOR\nDESIGN, INFRASTRUCTURE\nAND ENVIRONMENTAL\nCOMMUNICATION",
+      "subtitle": "Photorealistic visualization, visual simulation and interactive storytelling for architecture, infrastructure and complex technical environments.",
+      "paragraph1": "I combine more than 25 years of visualization experience with real-time technology and interactive workflows to translate spatial and technical information into clear, convincing visual experiences.\n\nMy core tools include 3ds Max, V-Ray, Photoshop and Unreal Engine, supported by advanced lighting, materials, rendering and compositing experience.",
+      "sectionTitle": "PROFESSIONAL DIRECTION",
+      "paragraph2": "My current focus is extending established visualization expertise into infrastructure, energy and multidisciplinary design communication. The objective is to support planners, designers, engineers and stakeholders through accurate imagery and accessible spatial storytelling.",
+      "keyFocus": [
+        "PHOTOREALISTIC VISUALIZATION",
+        "VISUAL SIMULATION",
+        "INFRASTRUCTURE",
+        "IMMERSIVE EXPERIENCES"
+      ],
+      "disclaimer": "Selected professional work, prototypes and self-initiated concept studies.",
+      "heroImage": "/stantec-visualization/page-01.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "VISUALIZATION · INFRASTRUCTURE · IMMERSIVE EXPERIENCE",
+        "title": "VISUALIZATION FOR\nDESIGN, INFRASTRUCTURE\nAND ENVIRONMENTAL\nCOMMUNICATION",
+        "subtitle": "Photorealistic visualization, visual simulation and interactive storytelling for architecture, infrastructure and complex technical environments.",
+        "pageNumber": "01",
+        "pageCategory": "INTRODUCTION",
+        "primaryDescription": "I combine more than 25 years of visualization experience with real-time technology and interactive workflows to translate spatial and technical information into clear, convincing visual experiences.\n\nMy core tools include 3ds Max, V-Ray, Photoshop and Unreal Engine, supported by advanced lighting, materials, rendering and compositing experience.",
+        "secondarySectionTitle": "PROFESSIONAL DIRECTION",
+        "secondaryDescription": "My current focus is extending established visualization expertise into infrastructure, energy and multidisciplinary design communication. The objective is to support planners, designers, engineers and stakeholders through accurate imagery and accessible spatial storytelling.",
+        "heroImage": "/stantec-visualization/page-01.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "PHOTOREALISTIC VISUALIZATION",
+          "VISUAL SIMULATION",
+          "INFRASTRUCTURE",
+          "IMMERSIVE EXPERIENCES"
+        ],
+        "footerNote": "Selected professional work, prototypes and self-initiated concept studies.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "PROFESSIONAL PROFILE",
+      "pageNumber": "02",
+      "template": "case-study-standard",
+      "caseStudyLabel": "PROFILE",
+      "topLabel": "EXPERIENCE · CAPABILITIES · DIRECTION",
+      "title": "EXPERIENCE BUILT ON\nVISUAL QUALITY, TECHNICAL\nCLARITY AND CONTINUOUS\nINNOVATION",
+      "subtitle": "A visualization practice grounded in traditional production expertise and expanded through real-time and interactive technology.",
+      "paragraph1": "My experience spans architectural visualization, animation, lighting, compositing and interactive real-time environments, from interpreting design intent through production, review and final delivery.\n\nRecent independent studies extend these skills into infrastructure, visual simulation, and data-informed experiences.\n",
+      "sectionTitle": "CORE CAPABILITIES",
+      "paragraph2": "Advanced 3D production, photorealistic rendering, Photoshop compositing, camera matching, and Unreal Engine workflows support still imagery, animation, and interactive visual experiences.",
+      "keyFocus": [
+        "3DS MAX + V-RAY",
+        "PHOTOSHOP COMPOSITING",
+        "UNREAL ENGINE",
+        "TECHNICAL COMMUNICATION"
+      ],
+      "disclaimer": "Experience across visualization, lighting, animation, creative direction and real-time production.",
+      "heroImage": "/stantec-visualization/page-02.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "EXPERIENCE · CAPABILITIES · DIRECTION",
+        "title": "EXPERIENCE BUILT ON\nVISUAL QUALITY, TECHNICAL\nCLARITY AND CONTINUOUS\nINNOVATION",
+        "subtitle": "A visualization practice grounded in traditional production expertise and expanded through real-time and interactive technology.",
+        "pageNumber": "02",
+        "pageCategory": "PROFILE",
+        "primaryDescription": "My experience spans architectural visualization, animation, lighting, compositing and interactive real-time environments, from interpreting design intent through production, review and final delivery.\n\nRecent independent studies extend these skills into infrastructure, visual simulation, and data-informed experiences.\n",
+        "secondarySectionTitle": "CORE CAPABILITIES",
+        "secondaryDescription": "Advanced 3D production, photorealistic rendering, Photoshop compositing, camera matching, and Unreal Engine workflows support still imagery, animation, and interactive visual experiences.",
+        "heroImage": "/stantec-visualization/page-02.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "3DS MAX + V-RAY",
+          "PHOTOSHOP COMPOSITING",
+          "UNREAL ENGINE",
+          "TECHNICAL COMMUNICATION"
+        ],
+        "footerNote": "Experience across visualization, lighting, animation, creative direction and real-time production.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "COMPLEX FACILITY",
+      "pageNumber": "03",
+      "template": "case-study-standard",
+      "caseStudyLabel": "COMPLEX FACILITY",
+      "topLabel": "INFRASTRUCTURE · TECHNICAL VISUALIZATION",
+      "title": "COMPLEX FACILITY\nOPERATIONS\nVISUALIZATION",
+      "subtitle": "Communicating infrastructure, technical systems and operational environments through clear visual narratives.",
+      "paragraph1": "This self-initiated visualization study explores how a complex infrastructure facility can be presented for design review, operational understanding and stakeholder communication. The work combines cinematic visualization with technical overlays, spatial organization and systems-oriented storytelling.",
+      "sectionTitle": "VISUAL COMMUNICATION APPROACH",
+      "paragraph2": "The visual language highlights facility components, circulation, systems relationships and areas of operational interest without overwhelming the viewer with excessive technical information. The intention is to make a complex environment easier to understand while maintaining visual realism and design quality.",
+      "keyFocus": [
+        "FACILITY VISUALIZATION",
+        "SYSTEMS COMMUNICATION",
+        "SPATIAL CLARITY",
+        "STAKEHOLDER REVIEW"
+      ],
+      "disclaimer": "Self-initiated concept study using simulated project and operational information.",
+      "heroImage": "/stantec-visualization/page-03.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "INFRASTRUCTURE · TECHNICAL VISUALIZATION",
+        "title": "COMPLEX FACILITY\nOPERATIONS\nVISUALIZATION",
+        "subtitle": "Communicating infrastructure, technical systems and operational environments through clear visual narratives.",
+        "pageNumber": "03",
+        "pageCategory": "COMPLEX FACILITY",
+        "primaryDescription": "This self-initiated visualization study explores how a complex infrastructure facility can be presented for design review, operational understanding and stakeholder communication. The work combines cinematic visualization with technical overlays, spatial organization and systems-oriented storytelling.",
+        "secondarySectionTitle": "VISUAL COMMUNICATION APPROACH",
+        "secondaryDescription": "The visual language highlights facility components, circulation, systems relationships and areas of operational interest without overwhelming the viewer with excessive technical information. The intention is to make a complex environment easier to understand while maintaining visual realism and design quality.",
+        "heroImage": "/stantec-visualization/page-03.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "FACILITY VISUALIZATION",
+          "SYSTEMS COMMUNICATION",
+          "SPATIAL CLARITY",
+          "STAKEHOLDER REVIEW"
+        ],
+        "footerNote": "Self-initiated concept study using simulated project and operational information.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "OPERATIONAL SEQUENCE",
+      "pageNumber": "04",
+      "template": "case-study-standard",
+      "caseStudyLabel": "OPERATIONAL SEQUENCE",
+      "topLabel": "OPERATIONS · SEQUENCED STORYTELLING",
+      "title": "OPERATIONAL SEQUENCE\nAND TECHNICAL\nSTORYTELLING",
+      "subtitle": "Using structured visual sequences to explain inspection, access and component-review activities.",
+      "paragraph1": "This storyboard-driven visualization presents a controlled three-step operational sequence: inspection route, maintenance access and component-status review. The sequence demonstrates how technical activities can be communicated through spatial context, visual hierarchy, route indicators and asset-focused information.",
+      "sectionTitle": "FROM STATIC IMAGE TO PROCESS COMMUNICATION",
+      "paragraph2": "Rather than presenting the facility as a single isolated image, the sequence explains how people, systems and locations relate over time. The same approach can support animations, interactive reviews, training communication and client-facing technical presentations.",
+      "keyFocus": [
+        "INSPECTION ROUTES",
+        "MAINTENANCE ACCESS",
+        "ASSET REVIEW",
+        "ANIMATION PLANNING"
+      ],
+      "disclaimer": "Conceptual operational sequence developed for visualization and communication purposes.",
+      "heroImage": "/stantec-visualization/page-04.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "OPERATIONS · SEQUENCED STORYTELLING",
+        "title": "OPERATIONAL SEQUENCE\nAND TECHNICAL\nSTORYTELLING",
+        "subtitle": "Using structured visual sequences to explain inspection, access and component-review activities.",
+        "pageNumber": "04",
+        "pageCategory": "OPERATIONAL SEQUENCE",
+        "primaryDescription": "This storyboard-driven visualization presents a controlled three-step operational sequence: inspection route, maintenance access and component-status review. The sequence demonstrates how technical activities can be communicated through spatial context, visual hierarchy, route indicators and asset-focused information.",
+        "secondarySectionTitle": "FROM STATIC IMAGE TO PROCESS COMMUNICATION",
+        "secondaryDescription": "Rather than presenting the facility as a single isolated image, the sequence explains how people, systems and locations relate over time. The same approach can support animations, interactive reviews, training communication and client-facing technical presentations.",
+        "heroImage": "/stantec-visualization/page-04.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "INSPECTION ROUTES",
+          "MAINTENANCE ACCESS",
+          "ASSET REVIEW",
+          "ANIMATION PLANNING"
+        ],
+        "footerNote": "Conceptual operational sequence developed for visualization and communication purposes.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "AI DATA CENTER",
+      "pageNumber": "05",
+      "template": "case-study-standard",
+      "caseStudyLabel": "AI DATA CENTER",
+      "topLabel": "MISSION-CRITICAL INFRASTRUCTURE · SYSTEMS",
+      "title": "AI DATA CENTER\nINFRASTRUCTURE\nEXPERIENCE",
+      "subtitle": "Visualizing power, cooling, water, data and operational-support systems as one connected infrastructure ecosystem.",
+      "paragraph1": "This self-initiated concept study explores how the scale and complexity of an AI-focused data center campus can be communicated through cinematic visualization and systems-oriented presentation. The project considers the facility not only as a building, but as a network of interconnected energy, cooling, water, data and resilience systems.",
+      "sectionTitle": "INFRASTRUCTURE AS AN INTEGRATED EXPERIENCE",
+      "paragraph2": "The visualization strategy combines large-scale site imagery, technical context and executive-level communication. The objective is to help different audiences understand how mission-critical systems connect to architecture, operations and long-term infrastructure performance.",
+      "keyFocus": [
+        "POWER + COOLING",
+        "MISSION-CRITICAL SYSTEMS",
+        "SITE INFRASTRUCTURE",
+        "EXECUTIVE COMMUNICATION"
+      ],
+      "disclaimer": "Self-initiated conceptual study. No real facility, operator or performance data is represented.",
+      "heroImage": "/stantec-visualization/page-05.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "MISSION-CRITICAL INFRASTRUCTURE · SYSTEMS",
+        "title": "AI DATA CENTER\nINFRASTRUCTURE\nEXPERIENCE",
+        "subtitle": "Visualizing power, cooling, water, data and operational-support systems as one connected infrastructure ecosystem.",
+        "pageNumber": "05",
+        "pageCategory": "AI DATA CENTER",
+        "primaryDescription": "This self-initiated concept study explores how the scale and complexity of an AI-focused data center campus can be communicated through cinematic visualization and systems-oriented presentation. The project considers the facility not only as a building, but as a network of interconnected energy, cooling, water, data and resilience systems.",
+        "secondarySectionTitle": "INFRASTRUCTURE AS AN INTEGRATED EXPERIENCE",
+        "secondaryDescription": "The visualization strategy combines large-scale site imagery, technical context and executive-level communication. The objective is to help different audiences understand how mission-critical systems connect to architecture, operations and long-term infrastructure performance.",
+        "heroImage": "/stantec-visualization/page-05.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "POWER + COOLING",
+          "MISSION-CRITICAL SYSTEMS",
+          "SITE INFRASTRUCTURE",
+          "EXECUTIVE COMMUNICATION"
+        ],
+        "footerNote": "Self-initiated conceptual study. No real facility, operator or performance data is represented.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "VISUAL IMPACT",
+      "pageNumber": "06",
+      "template": "case-study-standard",
+      "caseStudyLabel": "VISUAL IMPACT",
+      "topLabel": "EXISTING CONDITION · PROPOSED CONDITION",
+      "title": "VISUAL IMPACT AND\nBEFORE-AND-AFTER\nSIMULATION",
+      "subtitle": "Integrating proposed infrastructure into an existing photographic environment with visual consistency and spatial credibility.",
+      "paragraph1": "This focused visual simulation study demonstrates the transfer of architectural visualization and compositing skills into a before-and-after infrastructure context. The proposed condition should maintain the exact existing camera position while addressing perspective, apparent scale, lighting direction, shadows, atmospheric depth, terrain relationships and landscape context.",
+      "sectionTitle": "VISUAL INTEGRATION PRINCIPLES",
+      "paragraph2": "The objective is not to create an idealized marketing image. The objective is to produce a clear and believable representation of how proposed infrastructure could appear from a defined viewpoint under documented visual conditions.",
+      "keyFocus": [
+        "CAMERA MATCHING",
+        "PERSPECTIVE",
+        "PHOTO COMPOSITING",
+        "LANDSCAPE CONTEXT"
+      ],
+      "disclaimer": "Independent visual simulation exercise. Not a formal commissioned Visual Impact Assessment.",
+      "heroImage": "/stantec-visualization/page-06.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "EXISTING CONDITION · PROPOSED CONDITION",
+        "title": "VISUAL IMPACT AND\nBEFORE-AND-AFTER\nSIMULATION",
+        "subtitle": "Integrating proposed infrastructure into an existing photographic environment with visual consistency and spatial credibility.",
+        "pageNumber": "06",
+        "pageCategory": "VISUAL IMPACT",
+        "primaryDescription": "This focused visual simulation study demonstrates the transfer of architectural visualization and compositing skills into a before-and-after infrastructure context. The proposed condition should maintain the exact existing camera position while addressing perspective, apparent scale, lighting direction, shadows, atmospheric depth, terrain relationships and landscape context.",
+        "secondarySectionTitle": "VISUAL INTEGRATION PRINCIPLES",
+        "secondaryDescription": "The objective is not to create an idealized marketing image. The objective is to produce a clear and believable representation of how proposed infrastructure could appear from a defined viewpoint under documented visual conditions.",
+        "heroImage": "/stantec-visualization/page-06.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "CAMERA MATCHING",
+          "PERSPECTIVE",
+          "PHOTO COMPOSITING",
+          "LANDSCAPE CONTEXT"
+        ],
+        "footerNote": "Independent visual simulation exercise. Not a formal commissioned Visual Impact Assessment.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "HYBRID COMPOSITING",
+      "pageNumber": "07",
+      "template": "case-study-standard",
+      "caseStudyLabel": "HYBRID COMPOSITING",
+      "topLabel": "UNREAL ENGINE · COMPOSITING · AI-ASSISTED CONTEXT",
+      "title": "HYBRID PHOTO\nCOMPOSITING AND\nVISUAL INTEGRATION",
+      "subtitle": "Combining real-time 3D, location-based context, and AI-assisted image development into a coherent architectural visualization.",
+      "paragraph1": "This visualization combines an Unreal Engine building model with AI-assisted context based on a real coastal location. The workflow focuses on camera alignment, scale, lighting, and atmosphere to integrate the architecture convincingly into its environment.",
+      "sectionTitle": "INTEGRATED VISUAL WORKFLOW",
+      "paragraph2": "Real-time 3D remains the foundation, while AI supports context development and final image enhancement. The goal is to improve speed and quality while preserving design intent, spatial credibility, and visual consistency.",
+      "keyFocus": [
+        "UNREAL ENGINE",
+        "CG-TO-CONTEXT",
+        "CAMERA + SCALE",
+        "AI-ASSISTED COMPOSITING"
+      ],
+      "disclaimer": "Hybrid visualization combining real-time 3D, compositing and AI-assisted environmental development.",
+      "heroImage": "/stantec-visualization/page-07.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "UNREAL ENGINE · COMPOSITING · AI-ASSISTED CONTEXT",
+        "title": "HYBRID PHOTO\nCOMPOSITING AND\nVISUAL INTEGRATION",
+        "subtitle": "Combining real-time 3D, location-based context, and AI-assisted image development into a coherent architectural visualization.",
+        "pageNumber": "07",
+        "pageCategory": "HYBRID COMPOSITING",
+        "primaryDescription": "This visualization combines an Unreal Engine building model with AI-assisted context based on a real coastal location. The workflow focuses on camera alignment, scale, lighting, and atmosphere to integrate the architecture convincingly into its environment.",
+        "secondarySectionTitle": "INTEGRATED VISUAL WORKFLOW",
+        "secondaryDescription": "Real-time 3D remains the foundation, while AI supports context development and final image enhancement. The goal is to improve speed and quality while preserving design intent, spatial credibility, and visual consistency.",
+        "heroImage": "/stantec-visualization/page-07.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "UNREAL ENGINE",
+          "CG-TO-CONTEXT",
+          "CAMERA + SCALE",
+          "AI-ASSISTED COMPOSITING"
+        ],
+        "footerNote": "Hybrid visualization combining real-time 3D, compositing and AI-assisted environmental development.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "VISUALIZATION",
+      "pageNumber": "08",
+      "template": "case-study-standard",
+      "caseStudyLabel": "VISUALIZATION",
+      "topLabel": "3DS MAX · V-RAY · PHOTOSHOP  ·  AI",
+      "title": "HYBRID VISUALIZATION WORKFLOW",
+      "subtitle": "Advanced modeling, rendering and post-production enhanced through a selective AI-assisted workflow.",
+      "paragraph1": "My professional foundation was built through architectural visualization using 3ds Max, V-Ray, Corona, and Photoshop. My current workflow combines these established tools with AI-assisted techniques for image enhancement, environment development, detail refinement, and faster visual iteration.",
+      "sectionTitle": "HYBRID PRODUCTION APPROACH",
+      "paragraph2": "Traditional modeling, materials, lighting, and rendering remain the foundation of the process. AI is used selectively to improve image quality, expand visual context, and optimize production, while preserving creative direction, architectural intent, and overall visual consistency.",
+      "keyFocus": [
+        "3DS MAX",
+        "V-RAY + CORONA",
+        "MATERIALS + LIGHTING",
+        "PHOTOSHOP + AI"
+      ],
+      "disclaimer": "Selected visualization work demonstrating an established hybrid production workflow.",
+      "heroImage": "/stantec-visualization/page-08.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "3DS MAX · V-RAY · PHOTOSHOP  ·  AI",
+        "title": "HYBRID VISUALIZATION WORKFLOW",
+        "subtitle": "Advanced modeling, rendering and post-production enhanced through a selective AI-assisted workflow.",
+        "pageNumber": "08",
+        "pageCategory": "VISUALIZATION",
+        "primaryDescription": "My professional foundation was built through architectural visualization using 3ds Max, V-Ray, Corona, and Photoshop. My current workflow combines these established tools with AI-assisted techniques for image enhancement, environment development, detail refinement, and faster visual iteration.",
+        "secondarySectionTitle": "HYBRID PRODUCTION APPROACH",
+        "secondaryDescription": "Traditional modeling, materials, lighting, and rendering remain the foundation of the process. AI is used selectively to improve image quality, expand visual context, and optimize production, while preserving creative direction, architectural intent, and overall visual consistency.",
+        "heroImage": "/stantec-visualization/page-08.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "3DS MAX",
+          "V-RAY + CORONA",
+          "MATERIALS + LIGHTING",
+          "PHOTOSHOP + AI"
+        ],
+        "footerNote": "Selected visualization work demonstrating an established hybrid production workflow.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "REAL-TIME",
+      "pageNumber": "09",
+      "template": "case-study-standard",
+      "caseStudyLabel": "REAL-TIME",
+      "topLabel": "UNREAL ENGINE · IMMERSIVE EXPERIENCE",
+      "title": "REAL-TIME AND\nIMMERSIVE\nVISUALIZATION",
+      "subtitle": "Extending visual communication into navigable environments, cinematic reviews and interactive presentation experiences.",
+      "paragraph1": "My current professional work includes Unreal Engine production for high-end architectural visualization and interactive real-time experiences. These workflows support dynamic lighting, cinematic sequencing, user navigation, design review and spatial exploration beyond the limitations of a static image.",
+      "sectionTitle": "FROM RENDERED IMAGE TO INTERACTIVE SPACE",
+      "paragraph2": "Real-time visualization creates opportunities for Virtual Reality, 360-degree imagery, interactive stakeholder reviews and immersive project communication. My experience includes Unreal Engine environments, lighting, Blueprints, navigation, object interaction, animation triggering and packaged presentation experiences.",
+      "keyFocus": [
+        "UNREAL ENGINE 5",
+        "REAL-TIME LIGHTING",
+        "INTERACTIVE NAVIGATION",
+        "CINEMATIC REVIEW"
+      ],
+      "disclaimer": "Current professional Unreal Engine experience supported by an extensive visualization background.",
+      "heroImage": "/stantec-visualization/page-09.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "UNREAL ENGINE · IMMERSIVE EXPERIENCE",
+        "title": "REAL-TIME AND\nIMMERSIVE\nVISUALIZATION",
+        "subtitle": "Extending visual communication into navigable environments, cinematic reviews and interactive presentation experiences.",
+        "pageNumber": "09",
+        "pageCategory": "REAL-TIME",
+        "primaryDescription": "My current professional work includes Unreal Engine production for high-end architectural visualization and interactive real-time experiences. These workflows support dynamic lighting, cinematic sequencing, user navigation, design review and spatial exploration beyond the limitations of a static image.",
+        "secondarySectionTitle": "FROM RENDERED IMAGE TO INTERACTIVE SPACE",
+        "secondaryDescription": "Real-time visualization creates opportunities for Virtual Reality, 360-degree imagery, interactive stakeholder reviews and immersive project communication. My experience includes Unreal Engine environments, lighting, Blueprints, navigation, object interaction, animation triggering and packaged presentation experiences.",
+        "heroImage": "/stantec-visualization/page-09.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "UNREAL ENGINE 5",
+          "REAL-TIME LIGHTING",
+          "INTERACTIVE NAVIGATION",
+          "CINEMATIC REVIEW"
+        ],
+        "footerNote": "Current professional Unreal Engine experience supported by an extensive visualization background.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Visualization Artist · Visual Simulation & Infrastructure",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    },
+    {
+      "name": "INNOVATION",
+      "pageNumber": "10",
+      "template": "case-study-standard",
+      "caseStudyLabel": "INNOVATION",
+      "topLabel": "WEB EXPERIENCE · DATA-INFORMED VISUALIZATION",
+      "title": "EXTENDING\nVISUALIZATION INTO\nINTERACTIVE EXPERIENCES",
+      "subtitle": "Combining visual design, public data, application logic and browser-based interaction.",
+      "paragraph1": "Oodi Smart Building Intelligence is a working self-initiated web prototype created to explore how public building information, live weather context and executive-level visual communication can be brought together in an accessible interactive experience. The application combines public data discovery, API integration, normalization, business logic, interface design and responsive front-end development.",
+      "sectionTitle": "A BROADER VISUALIZATION CAPABILITY",
+      "paragraph2": "The project demonstrates an ability to learn new tools, develop structured digital workflows and move from static presentation toward interactive, data-informed communication. It is a portfolio prototype using public and simulated context. It is not an operational building-management system or production digital twin.",
+      "keyFocus": [
+        "INTERACTIVE WEB EXPERIENCE",
+        "PUBLIC DATA",
+        "EXECUTIVE VISUALIZATION",
+        "RAPID PROTOTYPING"
+      ],
+      "disclaimer": "Cesar De Macedo · Visualization Artist · Ontario, Canada · cesardemacedo@gmail.com",
+      "heroImage": "/stantec-visualization/page-10.jpg",
+      "imageSettings": {
+        "fit": "cover",
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      "heroLayout": {
+        "width": 994,
+        "height": 559,
+        "x": 527,
+        "y": 153
+      },
+      "textLayout": {
+        "x": 78,
+        "y": 105,
+        "width": 405
+      },
+      "fontSettings": {
+        "title": 31,
+        "subtitle": 16,
+        "body": 15,
+        "keyFocus": 17
+      },
+      "theme": {
+        "backgroundColor": "#F4F5F5",
+        "primaryColor": "#20272E",
+        "accentColor": "#16727A",
+        "textColor": "#222931"
+      },
+      "wspDigital": {
+        "eyebrow": "WEB EXPERIENCE · DATA-INFORMED VISUALIZATION",
+        "title": "EXTENDING\nVISUALIZATION INTO\nINTERACTIVE EXPERIENCES",
+        "subtitle": "Combining visual design, public data, application logic and browser-based interaction.",
+        "pageNumber": "10",
+        "pageCategory": "INNOVATION",
+        "primaryDescription": "Oodi Smart Building Intelligence is a working self-initiated web prototype created to explore how public building information, live weather context and executive-level visual communication can be brought together in an accessible interactive experience. The application combines public data discovery, API integration, normalization, business logic, interface design and responsive front-end development.",
+        "secondarySectionTitle": "A BROADER VISUALIZATION CAPABILITY",
+        "secondaryDescription": "The project demonstrates an ability to learn new tools, develop structured digital workflows and move from static presentation toward interactive, data-informed communication. It is a portfolio prototype using public and simulated context. It is not an operational building-management system or production digital twin.",
+        "heroImage": "/stantec-visualization/page-10.jpg",
+        "imageFit": "cover",
+        "imagePositionX": 0,
+        "imagePositionY": 0,
+        "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": [
+          "INTERACTIVE WEB EXPERIENCE",
+          "PUBLIC DATA",
+          "EXECUTIVE VISUALIZATION",
+          "RAPID PROTOTYPING"
+        ],
+        "footerNote": "Cesar De Macedo · Visualization Artist · Ontario, Canada · cesardemacedo@gmail.com",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "LinkedIn · cesar-de-macedo-3b4a5a51",
+        "fontSizes": {
+          "eyebrow": 16,
+          "title": 31,
+          "subtitle": 16,
+          "body": 15,
+          "sectionTitle": 20,
+          "pageNumber": 36,
+          "pageCategory": 18,
+          "keyFocusLabel": 21,
+          "keyFocusItem": 17,
+          "footerNote": 16,
+          "footerName": 17,
+          "footerRole": 15
+        }
+      }
+    }
+  ],
+  "defaultPageLayout": {
+    "imageSettings": {
+      "fit": "cover",
+      "zoom": 1,
+      "x": 0,
+      "y": 0
+    },
+    "heroLayout": {
+      "width": 994,
+      "height": 559,
+      "x": 527,
+      "y": 153
+    },
+    "textLayout": {
+      "x": 78,
+      "y": 105,
+      "width": 405
+    },
+    "fontSettings": {
+      "title": 31,
+      "subtitle": 16,
+      "body": 15,
+      "keyFocus": 14
+    },
+    "theme": {
+      "backgroundColor": "#F4F5F5",
+      "primaryColor": "#20272E",
+      "accentColor": "#16727A",
+      "textColor": "#222931"
+    }
+  }
+}

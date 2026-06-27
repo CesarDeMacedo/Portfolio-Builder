@@ -958,9 +958,15 @@ button:disabled {
   font-weight: 900;
   letter-spacing: .075em;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: calc(100% - 520px);
 }
 
 .wsp-digital-top-label span {
+  position: absolute;
+  left: 0;
+  top: 100%;
   display: block;
   width: 258px;
   height: 5px;
@@ -1038,6 +1044,7 @@ button:disabled {
   font-weight: 470;
   line-height: 1.34;
   overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 
 .wsp-digital-section-kicker {
@@ -1111,10 +1118,15 @@ button:disabled {
   right: 74px;
   bottom: 32px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 114px;
+  justify-content: flex-end;
 }
 
 .wsp-digital-focus-bar {
-  height: 64px;
+  flex: 0 0 64px;
   display: grid;
   grid-template-columns: 270px 1fr;
   overflow: hidden;
@@ -1173,7 +1185,7 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 28px;
-  margin-top: 11px;
+  min-height: 36px;
 }
 
 .wsp-digital-disclaimer,
@@ -1190,11 +1202,15 @@ button:disabled {
 
 .wsp-digital-disclaimer {
   gap: 8px;
+  min-height: 2.4em;
+  max-height: 2.4em;
+  overflow: hidden;
 }
 
 .wsp-digital-signature {
   gap: 10px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .wsp-digital-signature strong {

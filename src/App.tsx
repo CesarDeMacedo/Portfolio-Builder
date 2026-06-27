@@ -598,7 +598,7 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
     setShowGuides,
   } = useBuilderStore()
   const activePage = project.pages.find((page) => page.id === activePageId) ?? project.pages[0]
-  const isWspProject = project.templateId === 'wsp-digital-advisory'
+  const isWspProject = project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization'
 
   const savedAtLabel = lastSavedAt
     ? new Intl.DateTimeFormat(undefined, {
@@ -658,10 +658,11 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
         <SelectField<TemplateId>
           label="Template"
           value={project.templateId}
-          options={['infrastructure-digital-twin', 'wsp-digital-advisory']}
+          options={['infrastructure-digital-twin', 'wsp-digital-advisory', 'stantec-visualization']}
           labels={{
             'infrastructure-digital-twin': 'Case Study Standard',
             'wsp-digital-advisory': 'WSP Digital Advisory Portfolio',
+            'stantec-visualization': 'Stantec Visualization Portfolio',
           }}
           onChange={selectTemplate}
         />
@@ -1110,7 +1111,7 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
       const [file] = files
       if (!file) return
       const image = await readImageForProject(file)
-      if (project.templateId === 'wsp-digital-advisory') {
+      if (project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization') {
         updateActivePage({
           heroImage: image,
           wspDigital: {
@@ -1173,7 +1174,7 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
               {project.templateId === 'infrastructure-digital-twin' && (
                 <CaseStudyStandard page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
               )}
-              {project.templateId === 'wsp-digital-advisory' && (
+              {(project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization') && (
                 <WspDigitalAdvisoryPage page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
               )}
             </div>

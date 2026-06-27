@@ -217,7 +217,7 @@ export const useBuilderStore = create<BuilderState>()(
             pages: state.project.pages.map((page) => {
               if (page.id !== id) return page
               const nextPage = { ...page, ...patch }
-              if (state.project.templateId !== 'wsp-digital-advisory') return nextPage
+              if (state.project.templateId !== 'wsp-digital-advisory' && state.project.templateId !== 'stantec-visualization') return nextPage
               return syncWspDigitalPage(nextPage, state.project.settings.authorName)
             }),
           },
@@ -232,7 +232,7 @@ export const useBuilderStore = create<BuilderState>()(
             name: `Page ${nextNumber}`,
           })
           const page =
-            state.project.templateId === 'wsp-digital-advisory'
+            state.project.templateId === 'wsp-digital-advisory' || state.project.templateId === 'stantec-visualization'
               ? syncWspDigitalPage(
                   {
                     ...pageBase,
@@ -261,7 +261,7 @@ export const useBuilderStore = create<BuilderState>()(
           if (index < 0) return state
           const duplicateBase = clonePage(state.project.pages[index], String(state.project.pages.length + 1).padStart(2, '0'))
           const duplicate =
-            state.project.templateId === 'wsp-digital-advisory'
+            state.project.templateId === 'wsp-digital-advisory' || state.project.templateId === 'stantec-visualization'
               ? syncWspDigitalPage(
                   {
                     ...duplicateBase,
