@@ -170,7 +170,6 @@ async function buildPortfolioPdf(options: PdfCaptureOptions, captureQuality: Exp
           for (const a of annotations) {
             // jsPDF link coordinates use PDF user units (px here) with origin at top-left
             // add a transparent link over the rendered text area
-            // @ts-expect-error - jsPDF link typing may vary
             pdf.link(a.x, a.y, a.w, a.h, { url: a.url })
           }
         }
