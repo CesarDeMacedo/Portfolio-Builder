@@ -21,6 +21,7 @@ import { createDefaultWspDigitalContent, getSixteenNineHeight } from './defaults
 import { exportCurrentPng, exportPortfolioPdf } from './exportUtils'
 import { downloadText, normalizeProject, readImageForProject, sanitizeFilename } from './fileUtils'
 import { useBuilderStore } from './store'
+import { usesDigitalEditorialPage } from './templateCapabilities'
 import { WspDigitalAdvisoryPage } from './wspDigitalAdvisoryPage'
 import type {
   ExportQuality,
@@ -202,10 +203,12 @@ function WspDigitalAdvisoryControls({
   page,
   onUpdate,
   onSaveLayoutDefault,
+  showThemeControls = false,
 }: {
   page: PortfolioPage
   onUpdate: (patch: Partial<PortfolioPage>) => void
   onSaveLayoutDefault: () => void
+  showThemeControls?: boolean
 }) {
   const content = createDefaultWspDigitalContent(page)
   const heroHeight = getSixteenNineHeight(page.heroLayout.width)
@@ -568,6 +571,32 @@ function WspDigitalAdvisoryControls({
         <Field label="Footer name" value={content.footerName} onChange={(footerName) => updateContent({ footerName })} />
         <Field label="Footer role" value={content.footerRole} onChange={(footerRole) => updateContent({ footerRole })} />
       </section>
+
+      {showThemeControls && (
+        <section className="panel">
+          <h2>Oodi Theme</h2>
+          <ColorField
+            label="Deep navy background"
+            value={page.theme.backgroundColor}
+            onChange={(backgroundColor) => onUpdate({ theme: { ...page.theme, backgroundColor } })}
+          />
+          <ColorField
+            label="Primary text"
+            value={page.theme.primaryColor}
+            onChange={(primaryColor) => onUpdate({ theme: { ...page.theme, primaryColor } })}
+          />
+          <ColorField
+            label="Cyan accent"
+            value={page.theme.accentColor}
+            onChange={(accentColor) => onUpdate({ theme: { ...page.theme, accentColor } })}
+          />
+          <ColorField
+            label="Secondary text"
+            value={page.theme.textColor}
+            onChange={(textColor) => onUpdate({ theme: { ...page.theme, textColor } })}
+          />
+        </section>
+      )}
     </>
   )
 }
@@ -598,7 +627,7 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
     setShowGuides,
   } = useBuilderStore()
   const activePage = project.pages.find((page) => page.id === activePageId) ?? project.pages[0]
-  const isWspProject = project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization'
+  const isDigitalEditorialProject = usesDigitalEditorialPage(project.templateId)
 
   const savedAtLabel = lastSavedAt
     ? new Intl.DateTimeFormat(undefined, {
@@ -658,11 +687,12 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
         <SelectField<TemplateId>
           label="Template"
           value={project.templateId}
-          options={['infrastructure-digital-twin', 'wsp-digital-advisory', 'stantec-visualization']}
+          options={['infrastructure-digital-twin', 'wsp-digital-advisory', 'stantec-visualization', 'oodi-smart-building']}
           labels={{
             'infrastructure-digital-twin': 'Case Study Standard',
             'wsp-digital-advisory': 'WSP Digital Advisory Portfolio',
             'stantec-visualization': 'Stantec Visualization Portfolio',
+            'oodi-smart-building': 'Oodi Smart Building Case Study',
           }}
           onChange={selectTemplate}
         />
@@ -757,11 +787,12 @@ function Sidebar({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
         </div>
       )}
 
-      {isWspProject ? (
+      {isDigitalEditorialProject ? (
         <WspDigitalAdvisoryControls
           page={activePage}
           onUpdate={updateActivePage}
           onSaveLayoutDefault={saveActiveLayoutAsDefault}
+          showThemeControls={project.templateId === 'oodi-smart-building'}
         />
       ) : (
         <>
@@ -1111,7 +1142,7 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
       const [file] = files
       if (!file) return
       const image = await readImageForProject(file)
-      if (project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization') {
+      if (usesDigitalEditorialPage(project.templateId)) {
         updateActivePage({
           heroImage: image,
           wspDigital: {
@@ -1176,6 +1207,14 @@ function Preview({ previewRef }: { previewRef: React.RefObject<HTMLDivElement | 
               )}
               {(project.templateId === 'wsp-digital-advisory' || project.templateId === 'stantec-visualization') && (
                 <WspDigitalAdvisoryPage page={activePage} pageSize={project.settings.pageSize} showGuides={showGuides} />
+              )}
+              {project.templateId === 'oodi-smart-building' && (
+                <WspDigitalAdvisoryPage
+                  page={activePage}
+                  pageSize={project.settings.pageSize}
+                  showGuides={showGuides}
+                  themeVariant="oodi"
+                />
               )}
             </div>
           </div>

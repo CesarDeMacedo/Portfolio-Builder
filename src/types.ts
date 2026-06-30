@@ -2,7 +2,11 @@ export type PageSize = '16:9' | '4:3' | 'A4 landscape' | '9:16'
 
 export type ExportQuality = 'linkedin' | 'web' | 'print' | 'high'
 
-export type TemplateId = 'infrastructure-digital-twin' | 'wsp-digital-advisory' | 'stantec-visualization'
+export type TemplateId =
+  | 'infrastructure-digital-twin'
+  | 'wsp-digital-advisory'
+  | 'stantec-visualization'
+  | 'oodi-smart-building'
 
 export type WspLayoutType = 'cover' | 'profile'
 

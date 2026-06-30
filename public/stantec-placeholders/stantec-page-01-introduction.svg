@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#F4F5F5"/>
+  <rect x="80" y="80" width="1440" height="740" rx="24" fill="#FFFFFF" stroke="#D9DEE2" stroke-width="2"/>
+  <rect x="140" y="140" width="760" height="420" rx="18" fill="#E7ECEF"/>
+  <rect x="980" y="140" width="420" height="180" rx="18" fill="#16727A" opacity="0.18"/>
+  <rect x="980" y="350" width="420" height="270" rx="18" fill="#20272E" opacity="0.12"/>
+  <path d="M180 490 L420 310 L620 430 L760 260" stroke="#16727A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="420" cy="310" r="18" fill="#16727A"/>
+  <circle cx="620" cy="430" r="18" fill="#16727A"/>
+  <circle cx="760" cy="260" r="18" fill="#16727A"/>
+  <rect x="140" y="620" width="540" height="120" rx="16" fill="#F4F5F5"/>
+  <text x="180" y="680" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#20272E">Infrastructure visualization</text>
+  <text x="180" y="724" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#5F6C77">Placeholder hero asset for Stantec portfolio</text>
+</svg>

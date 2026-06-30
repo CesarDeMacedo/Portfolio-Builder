@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "templateId": "oodi-smart-building",
+  "settings": {
+    "projectName": "Oodi Smart Building Case Study",
+    "portfolioTitle": "Oodi Smart Building Intelligence",
+    "authorName": "Cesar De Macedo",
+    "pageSize": "16:9",
+    "exportQuality": "linkedin"
+  },
+  "defaultPageLayout": {
+    "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 },
+    "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 },
+    "textLayout": { "x": 74, "y": 150, "width": 410 },
+    "fontSettings": { "title": 33, "subtitle": 18, "body": 15, "keyFocus": 14 },
+    "theme": {
+      "backgroundColor": "#031226",
+      "primaryColor": "#F5F8FC",
+      "accentColor": "#35CFFF",
+      "textColor": "#A8BCD5"
+    }
+  },
+  "pages": [
+    {
+      "name": "CASE STUDY INTRODUCTION",
+      "pageNumber": "01",
+      "template": "case-study-standard",
+      "caseStudyLabel": "CASE STUDY",
+      "topLabel": "SELF-INITIATED DIGITAL PROTOTYPE",
+      "title": "OODI SMART BUILDING INTELLIGENCE",
+      "subtitle": "Public building data, weather context and conceptual intelligence layers translated into a clear Digital Advisory experience.",
+      "paragraph1": "This self-initiated case study explores how public utility data, current weather context and clearly labelled conceptual building-intelligence modules can be transformed into an accessible digital experience for decision-makers and stakeholders.",
+      "sectionTitle": "Digital advisory experience",
+      "paragraph2": "Bringing together public data and conceptual intelligence layers to communicate resource use, spatial context, data quality and building-performance information.",
+      "keyFocus": ["Public Data", "Resource Performance", "Building Intelligence", "Interactive UX", "Data Transparency"],
+      "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 },
+      "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 },
+      "textLayout": { "x": 74, "y": 150, "width": 410 },
+      "fontSettings": { "title": 33, "subtitle": 18, "body": 15, "keyFocus": 14 },
+      "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": {
+        "eyebrow": "SELF-INITIATED DIGITAL PROTOTYPE",
+        "title": "OODI SMART BUILDING INTELLIGENCE",
+        "subtitle": "Public building data, weather context and conceptual intelligence layers translated into a clear Digital Advisory experience.",
+        "pageNumber": "01",
+        "pageCategory": "CASE STUDY",
+        "primaryDescription": "This self-initiated case study explores how public utility data, current weather context and clearly labelled conceptual building-intelligence modules can be transformed into an accessible digital experience for decision-makers and stakeholders.",
+        "secondarySectionTitle": "Digital advisory experience",
+        "secondaryDescription": "Bringing together public data and conceptual intelligence layers to communicate resource use, spatial context, data quality and building-performance information.",
+        "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": ["Public Data", "Resource Performance", "Building Intelligence", "Interactive UX", "Data Transparency"],
+        "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+        "footerName": "Cesar De Macedo",
+        "footerRole": "Digital Experience & Real-Time Visualization Specialist",
+        "fontSizes": { "eyebrow": 15, "title": 33, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 }
+      }
+    },
+    {
+      "name": "PROJECT CHALLENGE",
+      "pageNumber": "02",
+      "template": "case-study-standard",
+      "caseStudyLabel": "CASE STUDY",
+      "topLabel": "PUBLIC BUILDING DATA EXPERIENCE",
+      "title": "FROM FRAGMENTED DATA TO A CLEAR BUILDING STORY",
+      "subtitle": "Public building data may be technically available while remaining difficult to interpret, compare and communicate.",
+      "paragraph1": "Utility readings, timestamps, weather context and spatial information often exist in separate systems. The challenge was to organize these sources into one understandable experience without overstating data quality or operational capability.",
+      "sectionTitle": "Design opportunity",
+      "paragraph2": "Create an executive and stakeholder-facing interface that connects building identity, resource performance, spatial context and transparent data provenance.",
+      "keyFocus": ["Data Normalization", "Visual Hierarchy", "Stakeholder Communication", "Technical Honesty", "Responsive Experience"],
+      "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 },
+      "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 },
+      "textLayout": { "x": 74, "y": 150, "width": 410 },
+      "fontSettings": { "title": 31, "subtitle": 18, "body": 15, "keyFocus": 14 },
+      "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": {
+        "eyebrow": "PUBLIC BUILDING DATA EXPERIENCE",
+        "title": "FROM FRAGMENTED DATA TO A CLEAR BUILDING STORY",
+        "subtitle": "Public building data may be technically available while remaining difficult to interpret, compare and communicate.",
+        "pageNumber": "02", "pageCategory": "CASE STUDY",
+        "primaryDescription": "Utility readings, timestamps, weather context and spatial information often exist in separate systems. The challenge was to organize these sources into one understandable experience without overstating data quality or operational capability.",
+        "secondarySectionTitle": "Design opportunity",
+        "secondaryDescription": "Create an executive and stakeholder-facing interface that connects building identity, resource performance, spatial context and transparent data provenance.",
+        "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1,
+        "keyFocusLabel": "KEY FOCUS",
+        "keyFocusItems": ["Data Normalization", "Visual Hierarchy", "Stakeholder Communication", "Technical Honesty", "Responsive Experience"],
+        "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+        "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist",
+        "fontSizes": { "eyebrow": 15, "title": 31, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 }
+      }
+    },
+    {
+      "name": "EXECUTIVE OVERVIEW",
+      "pageNumber": "03", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY",
+      "topLabel": "EXECUTIVE BUILDING OVERVIEW",
+      "title": "A CONNECTED VIEW OF BUILDING PERFORMANCE",
+      "subtitle": "A single interface brings together building context, public utility readings, current weather and high-level observations.",
+      "paragraph1": "The Overview experience presents electricity, heat, water and district cooling independently, while preserving their source, timestamp, unit and availability status.",
+      "sectionTitle": "Decision-ready context",
+      "paragraph2": "Resource summaries, weather context, deterministic observations and data classifications are presented in a format suitable for both technical and non-technical stakeholders.",
+      "keyFocus": ["Executive Overview", "Four Utilities", "Weather Context", "Deterministic Insights", "Source Status"],
+      "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 32, "subtitle": 18, "body": 15, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "EXECUTIVE BUILDING OVERVIEW", "title": "A CONNECTED VIEW OF BUILDING PERFORMANCE", "subtitle": "A single interface brings together building context, public utility readings, current weather and high-level observations.", "pageNumber": "03", "pageCategory": "CASE STUDY", "primaryDescription": "The Overview experience presents electricity, heat, water and district cooling independently, while preserving their source, timestamp, unit and availability status.", "secondarySectionTitle": "Decision-ready context", "secondaryDescription": "Resource summaries, weather context, deterministic observations and data classifications are presented in a format suitable for both technical and non-technical stakeholders.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["Executive Overview", "Four Utilities", "Weather Context", "Deterministic Insights", "Source Status"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 32, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    },
+    {
+      "name": "RESOURCE PERFORMANCE", "pageNumber": "04", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY", "topLabel": "PUBLIC UTILITY ANALYTICS", "title": "UTILITY-AWARE RESOURCE PERFORMANCE", "subtitle": "Electricity, heat, water and district cooling respond through synchronized visual and analytical states.", "paragraph1": "Selecting a resource updates the architectural overlay, chart, KPIs, timestamps, unit and data-quality status. Requested and effective periods remain visible so fallback data is never presented as current.", "sectionTitle": "Honest data behavior", "paragraph2": "The experience preserves independent utility timestamps, supports multiple time windows and does not interpolate or fabricate unavailable readings.", "keyFocus": ["Electricity", "Heat", "Water", "District Cooling", "Period Transparency"], "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 33, "subtitle": 18, "body": 15, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "PUBLIC UTILITY ANALYTICS", "title": "UTILITY-AWARE RESOURCE PERFORMANCE", "subtitle": "Electricity, heat, water and district cooling respond through synchronized visual and analytical states.", "pageNumber": "04", "pageCategory": "CASE STUDY", "primaryDescription": "Selecting a resource updates the architectural overlay, chart, KPIs, timestamps, unit and data-quality status. Requested and effective periods remain visible so fallback data is never presented as current.", "secondarySectionTitle": "Honest data behavior", "secondaryDescription": "The experience preserves independent utility timestamps, supports multiple time windows and does not interpolate or fabricate unavailable readings.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["Electricity", "Heat", "Water", "District Cooling", "Period Transparency"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 33, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    },
+    {
+      "name": "BUILDING INTELLIGENCE", "pageNumber": "05", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY", "topLabel": "CONCEPTUAL SPATIAL EXPERIENCE", "title": "BUILDING INTELLIGENCE THROUGH SPATIAL STORYTELLING", "subtitle": "Conceptual zones and intelligence layers demonstrate how operational information could be communicated spatially.", "paragraph1": "Users can explore four building levels and five intelligence layers, including occupancy, indoor comfort, air quality, HVAC and asset health.", "sectionTitle": "Conceptual IoT layer", "paragraph2": "All spatial indicators are deterministic prototype content. They are clearly separated from public building data and do not imply a connection to real sensors, BMS platforms or operational controls.", "keyFocus": ["Four Levels", "Five Intelligence Layers", "Zone Interaction", "Conceptual IoT", "Technical Disclosure"], "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 30, "subtitle": 18, "body": 15, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "CONCEPTUAL SPATIAL EXPERIENCE", "title": "BUILDING INTELLIGENCE THROUGH SPATIAL STORYTELLING", "subtitle": "Conceptual zones and intelligence layers demonstrate how operational information could be communicated spatially.", "pageNumber": "05", "pageCategory": "CASE STUDY", "primaryDescription": "Users can explore four building levels and five intelligence layers, including occupancy, indoor comfort, air quality, HVAC and asset health.", "secondarySectionTitle": "Conceptual IoT layer", "secondaryDescription": "All spatial indicators are deterministic prototype content. They are clearly separated from public building data and do not imply a connection to real sensors, BMS platforms or operational controls.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["Four Levels", "Five Intelligence Layers", "Zone Interaction", "Conceptual IoT", "Technical Disclosure"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 30, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    },
+    {
+      "name": "INSIGHTS", "pageNumber": "06", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY", "topLabel": "RULE-BASED OBSERVATIONS", "title": "DETERMINISTIC INSIGHTS WITHOUT UNSUPPORTED CLAIMS", "subtitle": "The Insights experience converts available data and coverage conditions into concise observations.", "paragraph1": "Priority notices, latest readings, weather context and data-quality information are generated through deterministic rules rather than a language model.", "sectionTitle": "Observation, not prediction", "paragraph2": "The interface avoids unsupported causal conclusions, forecasts and synthetic performance scores. Partial or unavailable periods remain explicitly labelled.", "keyFocus": ["Deterministic Rules", "Priority Notices", "Latest Readings", "Weather Independence", "Data Quality"], "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 30, "subtitle": 18, "body": 15, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "RULE-BASED OBSERVATIONS", "title": "DETERMINISTIC INSIGHTS WITHOUT UNSUPPORTED CLAIMS", "subtitle": "The Insights experience converts available data and coverage conditions into concise observations.", "pageNumber": "06", "pageCategory": "CASE STUDY", "primaryDescription": "Priority notices, latest readings, weather context and data-quality information are generated through deterministic rules rather than a language model.", "secondarySectionTitle": "Observation, not prediction", "secondaryDescription": "The interface avoids unsupported causal conclusions, forecasts and synthetic performance scores. Partial or unavailable periods remain explicitly labelled.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["Deterministic Rules", "Priority Notices", "Latest Readings", "Weather Independence", "Data Quality"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 30, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    },
+    {
+      "name": "DATA TRANSPARENCY", "pageNumber": "07", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY", "topLabel": "METHODOLOGY AND LIMITATIONS", "title": "CLEAR DISTINCTION BETWEEN REAL AND CONCEPTUAL DATA", "subtitle": "The methodology page explains the origin, timing, limitations and classification of every information layer.", "paragraph1": "Nuuka provides public property-level utility data. Open-Meteo provides current public weather context. The Building Intelligence dataset is deterministic conceptual prototype content.", "sectionTitle": "Technical honesty", "paragraph2": "The application documents fallback behavior, cached snapshots, partial coverage, independent timestamps, image attribution and project limitations.", "keyFocus": ["Public Building Data", "Public Weather", "Conceptual IoT", "Methodology", "Limitations"], "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 30, "subtitle": 18, "body": 15, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "METHODOLOGY AND LIMITATIONS", "title": "CLEAR DISTINCTION BETWEEN REAL AND CONCEPTUAL DATA", "subtitle": "The methodology page explains the origin, timing, limitations and classification of every information layer.", "pageNumber": "07", "pageCategory": "CASE STUDY", "primaryDescription": "Nuuka provides public property-level utility data. Open-Meteo provides current public weather context. The Building Intelligence dataset is deterministic conceptual prototype content.", "secondarySectionTitle": "Technical honesty", "secondaryDescription": "The application documents fallback behavior, cached snapshots, partial coverage, independent timestamps, image attribution and project limitations.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["Public Building Data", "Public Weather", "Conceptual IoT", "Methodology", "Limitations"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 30, "subtitle": 18, "body": 15, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    },
+    {
+      "name": "ROLE AND TECHNOLOGY", "pageNumber": "08", "template": "case-study-standard", "caseStudyLabel": "CASE STUDY", "topLabel": "PRODUCT STRATEGY AND DELIVERY", "title": "FROM PRODUCT CONCEPT TO DEPLOYED MVP", "subtitle": "A complete self-initiated case study spanning strategy, UX/UI, public APIs, technical visualization, testing and deployment.", "paragraph1": "The project was developed as a browser-based Digital Advisory prototype with a strong focus on data integrity, accessible communication and portfolio-quality presentation.", "sectionTitle": "Role and contribution", "paragraph2": "Product strategy, information architecture, UX/UI direction, data-source evaluation, technical visualization, AI-assisted development, QA and portfolio packaging. ChatGPT, Claude Code and Codex were development-assistance tools only; no generative AI runs inside the deployed application.", "keyFocus": ["React & TypeScript", "Public APIs", "Responsive UX", "Automated QA", "GitHub Deployment"], "disclaimer": "Independent portfolio prototype using public data and clearly labelled conceptual layers.",
+      "imageSettings": { "fit": "cover", "zoom": 1, "x": 0, "y": 0 }, "heroLayout": { "x": 520, "y": 160, "width": 1003, "height": 564 }, "textLayout": { "x": 74, "y": 150, "width": 410 }, "fontSettings": { "title": 32, "subtitle": 17, "body": 14, "keyFocus": 14 }, "theme": { "backgroundColor": "#031226", "primaryColor": "#F5F8FC", "accentColor": "#35CFFF", "textColor": "#A8BCD5" },
+      "wspDigital": { "eyebrow": "PRODUCT STRATEGY AND DELIVERY", "title": "FROM PRODUCT CONCEPT TO DEPLOYED MVP", "subtitle": "A complete self-initiated case study spanning strategy, UX/UI, public APIs, technical visualization, testing and deployment.", "pageNumber": "08", "pageCategory": "CASE STUDY", "primaryDescription": "The project was developed as a browser-based Digital Advisory prototype with a strong focus on data integrity, accessible communication and portfolio-quality presentation.", "secondarySectionTitle": "Role and contribution", "secondaryDescription": "Product strategy, information architecture, UX/UI direction, data-source evaluation, technical visualization, AI-assisted development, QA and portfolio packaging. ChatGPT, Claude Code and Codex were development-assistance tools only; no generative AI runs inside the deployed application.", "imageFit": "cover", "imagePositionX": 0, "imagePositionY": 0, "imageScale": 1, "keyFocusLabel": "KEY FOCUS", "keyFocusItems": ["React & TypeScript", "Public APIs", "Responsive UX", "Automated QA", "GitHub Deployment"], "footerNote": "Independent portfolio prototype using public data and clearly labelled conceptual layers.", "footerName": "Cesar De Macedo", "footerRole": "Digital Experience & Real-Time Visualization Specialist", "fontSizes": { "eyebrow": 15, "title": 32, "subtitle": 17, "body": 14, "sectionTitle": 19, "pageNumber": 32, "pageCategory": 15, "keyFocusLabel": 19, "keyFocusItem": 14, "footerNote": 12, "footerName": 14, "footerRole": 12 } }
+    }
+  ]
+}

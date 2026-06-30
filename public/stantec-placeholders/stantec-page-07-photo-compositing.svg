@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#F4F5F5"/>
+  <rect x="80" y="80" width="1440" height="740" rx="24" fill="#FFFFFF" stroke="#D9DEE2" stroke-width="2"/>
+  <rect x="180" y="170" width="1240" height="560" rx="20" fill="#EEF2F4"/>
+  <rect x="240" y="220" width="760" height="440" rx="18" fill="#D9DEE2"/>
+  <rect x="1040" y="220" width="320" height="440" rx="18" fill="#FFFFFF"/>
+  <path d="M300 560 L490 390 L680 470 L780 320" stroke="#16727A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="490" cy="390" r="16" fill="#16727A"/>
+  <circle cx="680" cy="470" r="16" fill="#16727A"/>
+  <circle cx="780" cy="320" r="16" fill="#16727A"/>
+  <rect x="1080" y="260" width="240" height="120" rx="16" fill="#20272E" opacity="0.12"/>
+  <rect x="1080" y="420" width="240" height="180" rx="16" fill="#16727A" opacity="0.16"/>
+  <text x="1080" y="728" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#20272E">Photo integration</text>
+  <text x="1080" y="770" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#5F6C77">Lighting, shadow and atmosphere</text>
+</svg>

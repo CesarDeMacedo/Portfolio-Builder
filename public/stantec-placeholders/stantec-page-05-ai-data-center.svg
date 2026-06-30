@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#F4F5F5"/>
+  <rect x="80" y="80" width="1440" height="740" rx="24" fill="#FFFFFF" stroke="#D9DEE2" stroke-width="2"/>
+  <rect x="160" y="160" width="1280" height="580" rx="22" fill="#EEF2F4"/>
+  <path d="M240 640h320V320H240z" fill="#20272E" opacity="0.12"/>
+  <path d="M620 640h320V240H620z" fill="#16727A" opacity="0.18"/>
+  <path d="M1000 640h320V280H1000z" fill="#20272E" opacity="0.08"/>
+  <path d="M320 380h140v120H320z" fill="#16727A" opacity="0.4"/>
+  <path d="M700 320h140v220H700z" fill="#16727A" opacity="0.26"/>
+  <path d="M1080 340h140v200h-140z" fill="#16727A" opacity="0.16"/>
+  <path d="M250 250h300" stroke="#16727A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M620 220h340" stroke="#20272E" stroke-width="12" stroke-linecap="round" opacity="0.3"/>
+  <text x="180" y="740" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" fill="#20272E">AI data center concept</text>
+  <text x="180" y="788" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#5F6C77">Mission-critical systems and infrastructure narrative</text>
+</svg>

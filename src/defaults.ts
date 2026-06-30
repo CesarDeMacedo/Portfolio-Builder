@@ -17,6 +17,7 @@ import type {
 } from './types'
 import { defaultProjectTemplate, getProjectTemplate } from './templates'
 import { WSP_TEMPLATE_TOKENS } from './wspTokens'
+import { usesDigitalEditorialPage } from './templateCapabilities'
 
 export const defaultTheme: ThemeSettings = {
   backgroundColor: '#f4f7f8',
@@ -318,7 +319,12 @@ function normalizeWspDigitalPage(page: PortfolioPage, footerName?: string): Port
 }
 
 function isTemplateId(value: unknown): value is TemplateId {
-  return value === 'infrastructure-digital-twin' || value === 'wsp-digital-advisory' || value === 'stantec-visualization'
+  return (
+    value === 'infrastructure-digital-twin' ||
+    value === 'wsp-digital-advisory' ||
+    value === 'stantec-visualization' ||
+    value === 'oodi-smart-building'
+  )
 }
 
 export function normalizeProject(project: PortfolioProject | (Partial<PortfolioProject> & { pages?: PortfolioPage[] })): PortfolioProject {
@@ -329,13 +335,13 @@ export function normalizeProject(project: PortfolioProject | (Partial<PortfolioP
     Array.isArray(project.pages) && project.pages.length > 0
       ? project.pages
           .map(normalizePage)
-          .map((page) => (templateId === 'wsp-digital-advisory' || templateId === 'stantec-visualization' ? normalizeWspDigitalPage(page, settings.authorName) : page))
+          .map((page) => (usesDigitalEditorialPage(templateId) ? normalizeWspDigitalPage(page, settings.authorName) : page))
       : fallback.pages
   const defaultPageLayout = project.defaultPageLayout
     ? {
         imageSettings: { ...defaultImageSettings, ...project.defaultPageLayout.imageSettings },
         heroLayout:
-          templateId === 'wsp-digital-advisory' || templateId === 'stantec-visualization'
+          usesDigitalEditorialPage(templateId)
             ? normalizeHeroLayout({ ...defaultHeroLayout, ...project.defaultPageLayout.heroLayout })
             : { ...defaultHeroLayout, ...project.defaultPageLayout.heroLayout },
         textLayout: { ...defaultTextLayout, ...project.defaultPageLayout.textLayout },

@@ -1,6 +1,8 @@
 import { Info, Target, Upload } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { getCanvasSize } from './canvas'
 import { createDefaultWspDigitalContent } from './defaults'
+import { OODI_THEME_TOKENS } from './oodiTokens'
 import type { PageSize, PortfolioPage } from './types'
 import { WSP_TEMPLATE_TOKENS } from './wspTokens'
 
@@ -8,10 +10,12 @@ export function WspDigitalAdvisoryPage({
   page,
   pageSize,
   showGuides,
+  themeVariant = 'wsp',
 }: {
   page: PortfolioPage
   pageSize: PageSize
   showGuides: boolean
+  themeVariant?: 'wsp' | 'oodi'
 }) {
   const size = getCanvasSize(pageSize)
   const content = createDefaultWspDigitalContent(page)
@@ -37,16 +41,29 @@ export function WspDigitalAdvisoryPage({
     y: page.textLayout?.y ?? tokens.textZone.y,
     width: page.textLayout?.width ?? tokens.textZone.width,
   }
+  const isOodi = themeVariant === 'oodi'
+  const canvasStyle = {
+    width: size.width,
+    height: size.height,
+    background: isOodi
+      ? `radial-gradient(circle at 72% 26%, ${OODI_THEME_TOKENS.panelRaised} 0, ${page.theme.backgroundColor} 43%)`
+      : page.theme.backgroundColor,
+    color: page.theme.textColor,
+    '--oodi-bg': page.theme.backgroundColor,
+    '--oodi-panel': OODI_THEME_TOKENS.panel,
+    '--oodi-panel-raised': OODI_THEME_TOKENS.panelRaised,
+    '--oodi-accent': page.theme.accentColor,
+    '--oodi-accent-secondary': OODI_THEME_TOKENS.accentSecondary,
+    '--oodi-text': page.theme.primaryColor,
+    '--oodi-text-muted': page.theme.textColor,
+    '--oodi-border': OODI_THEME_TOKENS.border,
+    '--oodi-warm-accent': OODI_THEME_TOKENS.warmAccent,
+  } as CSSProperties
 
   return (
     <div
-      className="portfolio-canvas wsp-digital-canvas"
-      style={{
-        width: size.width,
-        height: size.height,
-        background: page.theme.backgroundColor,
-        color: page.theme.textColor,
-      }}
+      className={`portfolio-canvas wsp-digital-canvas${isOodi ? ' oodi-digital-canvas' : ''}`}
+      style={canvasStyle}
     >
       {showGuides && (
         <div className="safe-guides">
@@ -64,9 +81,12 @@ export function WspDigitalAdvisoryPage({
         <span style={{ background: page.theme.accentColor }} />
       </div>
 
-      <div className="wsp-digital-page-flag" style={{ background: page.theme.primaryColor }}>
+      <div
+        className="wsp-digital-page-flag"
+        style={{ background: isOodi ? OODI_THEME_TOKENS.panel : page.theme.primaryColor }}
+      >
         <strong style={{ fontSize: type.pageNumber }}>{content.pageNumber}</strong>
-        <span style={{ fontSize: type.pageCategory }}>{content.pageCategory}</span>
+        <span style={{ fontSize: type.pageCategory }}>{isOodi ? `/ ${content.pageCategory}` : content.pageCategory}</span>
       </div>
 
       <main className="wsp-digital-content-grid">
@@ -123,7 +143,10 @@ export function WspDigitalAdvisoryPage({
 
       <footer className="wsp-digital-focus-footer">
         <div className="wsp-digital-focus-bar">
-          <div className="wsp-digital-focus-label" style={{ background: page.theme.primaryColor }}>
+          <div
+            className="wsp-digital-focus-label"
+            style={{ background: isOodi ? OODI_THEME_TOKENS.panelRaised : page.theme.primaryColor }}
+          >
             <Target size={27} />
             <span style={{ fontSize: type.keyFocusLabel }}>{content.keyFocusLabel}</span>
           </div>
